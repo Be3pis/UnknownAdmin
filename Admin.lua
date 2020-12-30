@@ -846,7 +846,7 @@ Unknown.AddCommand("Enable", "Enables a disabled player", function(player)
         local Player
         for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
             Player = v
-                      Player.Character:FindFirstChildOfClass("Humanoid").Name = "Humanoid"
+            Player.Character:FindFirstChildOfClass("Humanoid").Name = "Humanoid"
               for _,x in pairs(Player.Character:GetChildren()) do
                if x:IsA("Part") then
                   x.Anchored = false                              
