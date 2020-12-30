@@ -1,4 +1,4 @@
-        -- All credits to IceGear creators
+-- All credits to IceGear creators
 
 -- \Variables
 local wrk = game:GetService("Workspace")
