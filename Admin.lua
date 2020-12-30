@@ -1,4 +1,4 @@
--- All credits to IceGear creators
+        -- All credits to IceGear creators
 
 -- \Variables
 local wrk = game:GetService("Workspace")
@@ -824,39 +824,29 @@ Unknown.AddCommand("uncontrol", "Uncontrols a controlled player", function()
    game.Players[name].Character = workspace[name]
    workspace.CurrentCamera.CameraSubject = workspace[name].Humanoid
 end)
-Unknown.AddCommand("Disable", "Disables a character", function(player)
+
+
+Unknown.AddCommand("Disable", "Disables a player", function(player)
     if Unknown.GetShortenedPlrFromName(player) ~= nil then
-       local Player
-       for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
-          Player = v
-          if Player.Character:FindFirstChild("-Claimed") then
-             if Player.Character:FindFirstChild("Humanoid") then
-                Player.Character:FindFirstChild("Humanoid").Parent = Player.Character.HumanoidRootPart                        
-             end
-             else
-             Unknown.Notify("Claim the player first!")
-                                        
-              end
-          end
-       end
+        local Player
+        for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
+            Player = v
+                if Player.Character:FindFirstChild("Humanoid") then
+                    Player.Character.Humanoid.Parent = Player.Character.HumanoidRootPart
+                end
+        end
     end
 end, "player(s)")
 
-Unknown.AddCommand("Enabled", "Enables a disabled character", function(player)
+Unknown.AddCommand("Enable", "Enables a disabled player", function(player)
     if Unknown.GetShortenedPlrFromName(player) ~= nil then
-       local Player
-       for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
-          Player = v
-          if Player.Character:FindFirstChild("-Claimed") then
-             if Player.Character.HumanoidRootPart:FindFirstChild("Humanoid") then
-                Player.Character.HumanoidRootPart:FindFirstChild("Humanoid").Parent = Player.Character                        
-             end
-             else
-             Unknown.Notify("Claim the player first!")
-                                        
-              end
-          end
-       end
+        local Player
+        for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
+            Player = v
+                if Player.Character.HumanoidRootPart:FindFirstChild("Humanoid") then
+                    Player.Character.HumanoidRootPart.Humanoid.Parent = Player.Character
+                end
+        end
     end
 end, "player(s)")
 
