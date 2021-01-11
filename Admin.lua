@@ -6,6 +6,7 @@ local LocalPlayer = game:GetService("Players").LocalPlayer
 local CoreGui = game:GetService("CoreGui")
 local Character = LocalPlayer.Character
 local name = LocalPlayer.Name
+_G.Loopbring = false
 
 local Unknown = {
     Cmds = {},
@@ -1032,6 +1033,27 @@ Unknown.AddCommand("walkspeed/speed/ws", "Sets walkspeed of player, ONLY REPLICA
     end
 end, "player(s), speed")
 
+Unknown.AddCommand("loopbring/lb", "Loop brings the player", function(player)
+if Unknown.GetShortenedPlrFromName(player) ~= nil then
+        local Player
+        for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
+        Player = v
+        _G.Loopbring = true
+        Player.Character.Humanoid.WalkSpeed = 0
+        Player.Character.Humanoid.JumpPower = 0
+        while _G.Loopbring do
+        wait()
+        Player.Character.HumanoidRootPart.CFrame = LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(4.4,0,0)
+        end
+        end
+end
+end,"player(s)")
+
+Unknown.AddCommand("unloopbring/unlb", "stops loobringing all players the player", function()
+_G.Loopbring = false
+Player.Character.Humanoid.WalkSpeed = 16
+Player.Character.Humanoid.JumpPower = 50
+end)
 
 Unknown.AddCommand("jumppower/jp", "Sets jumppower of player, ONLY REPLICATES on other players IF player is/players are claimed with claim command (localplayer doesn't need to be claimed).", function(player, power)   
     if Unknown.GetShortenedPlrFromName(player) ~= nil then
