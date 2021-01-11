@@ -1234,6 +1234,13 @@ Unknown.AddCommand("Claim", "Claimes a player", function(player)
    local hum = chr.Humanoid;
 
    workspace.FallenPartsDestroyHeight = 0/1/0
+                                
+                                
+                             if not Player.Character:FindFirstChild("-Claimed") then
+                                local Claimed = Instance.new("ObjectValue")
+                                Claimed.Name = "-Claimed"
+                                Claimed.Parent = Player.Character
+                            end
 
    for i,v in pairs(plr.Backpack:GetChildren()) do
    if v:IsA("Tool") then
@@ -1283,11 +1290,6 @@ Unknown.AddCommand("Claim", "Claimes a player", function(player)
    wait()
    char:WaitForChild("HumanoidRootPart").CFrame = oldpos
 
-                             if not Player.Character:FindFirstChild("-Claimed") then
-                                local Claimed = Instance.new("ObjectValue")
-                                Claimed.Name = "-Claimed"
-                                Claimed.Parent = Player.Character
-                            end
                                       
    end
     end
