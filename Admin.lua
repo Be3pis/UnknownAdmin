@@ -1241,14 +1241,15 @@ Unknown.AddCommand("Claim", "Claimes a player", function(player)
      claim.Parent = Player.Character
   end
 
-   for i,v in pairs(plr.Backpack:GetChildren()) do
+
+
+   char:WaitForChild("Humanoid"):Remove()
+   Instance.new("Humanoid", char)
+  for i,v in pairs(plr.Backpack:GetChildren()) do
    if v:IsA("Tool") then
    v.Parent = char
    end
    end
-
-   char:WaitForChild("Humanoid"):Remove()
-   Instance.new("Humanoid", char)
    char:WaitForChild("Head"):Destroy()
    spawn(function()
 
