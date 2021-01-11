@@ -1282,9 +1282,13 @@ Unknown.AddCommand("Claim", "Claimes a player", function(player)
    for i = 1,10 do
    wait()
    char:WaitForChild("HumanoidRootPart").CFrame = oldpos
-   local claim = Instance.new("IntValue")
-   claim.Name = "-Claimed"
-   claim.Parent = Player.Character
+
+                             if not Player.Character:FindFirstChild("-Claimed") then
+                                local Claimed = Instance.new("ObjectValue")
+                                Claimed.Name = "-Claimed"
+                                Claimed.Parent = Player.Character
+                            end
+                                      
    end
     end
     else
