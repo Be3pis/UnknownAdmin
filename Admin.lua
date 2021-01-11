@@ -1254,7 +1254,7 @@ Unknown.AddCommand("Claim", "Claimes a player", function(player)
    spawn(function()
 
    while game:GetService("RunService").Heartbeat:wait(0.000000e+9) do
-   Player.Character.HumanoidRootPart.CFrame = Tool.Handle.CFrame
+    char:WaitForChild("HumanoidRootPart").CFrame = Player.Character.HumanoidRootPart * CFrame.new(-1,0,1)
    end
    end)
 
