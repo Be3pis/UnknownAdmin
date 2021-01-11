@@ -1226,7 +1226,7 @@ Unknown.AddCommand("Claim", "Claimes a player", function(player)
     local Player
     for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
    Player = v
-   local plr = game:GetService("Players").LocalPlayer
+        local plr = game:GetService("Players").LocalPlayer
    local char = plr.Character
    local oldpos = char:WaitForChild("HumanoidRootPart").CFrame
    local plr = game.Players.LocalPlayer;
@@ -1234,27 +1234,20 @@ Unknown.AddCommand("Claim", "Claimes a player", function(player)
    local hum = chr.Humanoid;
 
    workspace.FallenPartsDestroyHeight = 0/1/0
-                                
-  if not Player.Character:FindFirstChild("-Claimed") then
-     local claim = Instance.new("ObjectValue")
-     claim.Name = "-Claimed"
-     claim.Parent = Player.Character
-  end
 
-
-
-   char:WaitForChild("Humanoid"):Remove()
-   Instance.new("Humanoid", char)
-  for i,v in pairs(plr.Backpack:GetChildren()) do
+   for i,v in pairs(plr.Backpack:GetChildren()) do
    if v:IsA("Tool") then
    v.Parent = char
    end
    end
+
+   char:WaitForChild("Humanoid"):Remove()
+   Instance.new("Humanoid", char)
    char:WaitForChild("Head"):Destroy()
    spawn(function()
 
    while game:GetService("RunService").Heartbeat:wait(0.000000e+9) do
-   char:WaitForChild("HumanoidRootPart").CFrame = Player.Character:WaitForChild("HumanoidRootPart").CFrame * CFrame.new(-1,0,1)
+   char:WaitForChild("HumanoidRootPart").CFrame = Player.Character.HumanoidRootPart.CFrame
    end
    end)
 
@@ -1289,8 +1282,6 @@ Unknown.AddCommand("Claim", "Claimes a player", function(player)
    for i = 1,10 do
    wait()
    char:WaitForChild("HumanoidRootPart").CFrame = oldpos
-   end
-                                      
    end
     end
     else
