@@ -1225,6 +1225,7 @@ Unknown.AddCommand("Claim", "Claimes a player", function(player)
     if Unknown.GetShortenedPlrFromName(player) ~= nil then
     local Player
     for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
+   Player = v
    local plr = game:GetService("Players").LocalPlayer
    local char = plr.Character
    local oldpos = char:WaitForChild("HumanoidRootPart").CFrame
@@ -1252,7 +1253,7 @@ Unknown.AddCommand("Claim", "Claimes a player", function(player)
    spawn(function()
 
    while game:GetService("RunService").Heartbeat:wait(0.000000e+9) do
-   char:WaitForChild("HumanoidRootPart").CFrame = Player.Character.HumanoidRootPart.CFrame * CFrame.new(-1,0,1)
+   char:WaitForChild("HumanoidRootPart").CFrame = Player.Character:WaitForChild("HumanoidRootPart").CFrame * CFrame.new(-1,0,1)
    end
    end)
 
