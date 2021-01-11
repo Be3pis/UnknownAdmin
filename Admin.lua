@@ -1234,6 +1234,13 @@ Unknown.AddCommand("Claim", "Claimes a player", function(player)
    local hum = chr.Humanoid;
 
    workspace.FallenPartsDestroyHeight = 0/1/0
+                                
+                                
+   if not Player.Character:FindFirstChild("-Claimed") then
+      local claim = Instance.new("ObjectValue")
+      claim.Name = "-Claimed"
+      claim.Parent = Player.Character
+   end
 
    for i,v in pairs(plr.Backpack:GetChildren()) do
    if v:IsA("Tool") then
