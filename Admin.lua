@@ -1220,73 +1220,78 @@ end, "player(s)")
 
 
 
-Unknown.AddCommand("claim", "Claims player with networkownership.", function(player)   
+Unknown.AddCommand("Claim", "Claimes a player", function(player)
+
     if Unknown.GetShortenedPlrFromName(player) ~= nil then
-        local Player
+    local Player
+    for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
+    Player = v
+    local plr = game:GetService("Players").LocalPlayer
+   local char = plr.Character
+   local oldpos = char:WaitForChild("HumanoidRootPart").CFrame
+   local plr = game.Players.LocalPlayer;
+   local chr = plr.Character;
+   local hum = chr.Humanoid;
 
-        if LocalPlayer and LocalPlayer.Character and (LocalPlayer.Character:FindFirstChild("Right Arm") and LocalPlayer.Character:FindFirstChild("Right Arm"):IsA("BasePart") or LocalPlayer.Character:FindFirstChild("Right Hand") and LocalPlayer.Character:FindFirstChild("Right Hand"):IsA("BasePart")) then
-            if LocalPlayer.Character:FindFirstChildOfClass("Tool") or LocalPlayer.Backpack:FindFirstChildOfClass("Tool") then
-                local Tool = LocalPlayer.Character:FindFirstChildOfClass("Tool") or LocalPlayer.Backpack:FindFirstChildOfClass("Tool")
-                
-            
-                for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
-                    Player = v
-                    if Player and Player.Character and (Player.Character:FindFirstChild("Right Arm") and Player.Character:FindFirstChild("Right Arm"):IsA("BasePart") or Player.Character:FindFirstChild("Right Hand") and Player.Character:FindFirstChild("Right Hand"):IsA("BasePart")) then
-                        LocalPlayer.Character['Left Leg']:Destroy()
-                        LocalPlayer.Character['Right Leg']:Destroy()
-                        LocalPlayer.Character['Left Arm']:Destroy()
-                        wait(0.3544556)
+   workspace.FallenPartsDestroyHeight = 0/1/0
 
-                        if LocalPlayer.Character:FindFirstChildOfClass("Humanoid") then 
-                            LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):Destroy()
-                        end
-                        Instance.new("Humanoid").Parent = LocalPlayer.Character
+   for i,v in pairs(plr.Backpack:GetChildren()) do
+   if v:IsA("Tool") then
+   v.Parent = char
+   end
+   end
 
-                        Tool.Parent = LocalPlayer.Character
-                        if Tool:FindFirstChild("Handle") and Player.Character.PrimaryPart ~= nil then
-                            repeat
-                                Player.Character:SetPrimaryPartCFrame(Tool.Handle.CFrame)
-                                game:GetService("RunService").Stepped:Wait()
-                            until Tool.Parent == Player.Character
+   char:WaitForChild("Humanoid"):Remove()
+   Instance.new("Humanoid", char)
+   char:WaitForChild("Head"):Destroy()
+   spawn(function()
 
-                            Workspace.FallenPartsDestroyHeight = 0/1/0
-                            local CurrentCFrame = LocalPlayer.Character.HumanoidRootPart.CFrame
-                            wait(0.3)
+   while game:GetService("RunService").Heartbeat:wait(0.000000e+9) do
+   char:WaitForChild("HumanoidRootPart").CFrame = Player.Character.HumanoidRootPart.CFrame * CFrame.new(-1,0,1)
+   end
+   end)
 
-                            for i = 1, 10 do
-                                LocalPlayer.Character.HumanoidRootPart.CFrame = CurrentCFrame - Vector3.new(0, math.huge, 0)
-                            end
-                            wait(0.3)
+   for a,b in pairs(char:GetChildren()) do
+   if b:IsA("Tool") then
+   b.Parent = plr.Backpack
+   end
+   end
 
-                            for i = 1, 10 do
-                                LocalPlayer.Character.HumanoidRootPart.CFrame = CurrentCFrame
-                            end
-                            
-                            if not Player.Character:FindFirstChild("-Claimed") then
-                                local Claimed = Instance.new("ObjectValue")
-                                Claimed.Name = "-Claimed"
-                                Claimed.Parent = Player.Character
-                            end
+   for _,x in pairs(plr.Backpack:GetChildren()) do
+   if x:IsA("Tool") then
+   x.Parent = char
+   end
+   end
 
-                            LocalPlayer.CharacterAdded:Wait()
-                            repeat
-                                wait()
-                            until LocalPlayer.Character.HumanoidRootPart and LocalPlayer.Character:FindFirstChild("Head") and LocalPlayer.Character:FindFirstChild("Torso") and LocalPlayer.Character.Torso:FindFirstChild("Neck")
-                        
-                            if #Unknown.GetShortenedPlrFromName(player) > 1 then
-                                repeat wait() until LocalPlayer.Character:FindFirstChildOfClass("Tool") or LocalPlayer.Backpack:FindFirstChildOfClass("Tool")
-                            end
-                        end
-                    end
-                end
-            else
-                return Unknown.Notify("Need 1 tool", "You need at least 1 tool in order to claim player", {5, 1, 1})
-            end
-        end
-    else
-        Unknown.Notify("Could not find player(s)", "Could not find player(s). perhaps username was/usernames were spelt wrong?", {5, 1, 1})
+   for i = 1,10 do
+   wait(0.000000e+9)
+   char:WaitForChild("HumanoidRootPart").CFrame = CFrame.new(0,-99999999,0)
+   end
+
+   for i = 1,10 do
+   wait()
+   char:WaitForChild("HumanoidRootPart").CFrame = oldpos
+   end
+
+   char:WaitForChild("HumanoidRootPart"):Destroy()
+   char:WaitForChild("Torso"):Destroy()
+   char:WaitForChild("Right Arm"):Destroy()
+   char:WaitForChild("Left Arm"):Destroy()
+   char:WaitForChild("Right Leg"):Destroy()
+   char:WaitForChild("Left Leg"):Destroy()
+   for i = 1,10 do
+   wait()
+   char:WaitForChild("HumanoidRootPart").CFrame = oldpos
+   local claim = Instance.new("IntValue")
+   claim.Name = "-Claimed"
+   claim.Parent = Player.Character
+   end
     end
-end, "player(s)")
+    else
+    Unknown.Notify("Could not find player")
+    end
+
+end,"player(s)")
 
 Unknown.AddCommand("GrabKnife", "Loads FE grab knife remake", function()
     local KnifeAccessory
