@@ -1039,11 +1039,18 @@ if Unknown.GetShortenedPlrFromName(player) ~= nil then
         for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
         Player = v
         _G.Loopbring = true
-        Player.Character.Humanoid.WalkSpeed = 0
-        Player.Character.Humanoid.JumpPower = 0
         while _G.Loopbring do
         wait()
+        if Player then
         Player.Character.HumanoidRootPart.CFrame = LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(4.4,0,0)
+        else
+        Unknown.Notify("Player left :(")
+        _G.Loopbring = false
+        end
+        if Player.Character.Humanoid.Health == 0 then
+        Unknown.Notify("Player reseted :(")
+        _G.Loopbring = false
+        end
         end
         end
 end
@@ -1051,8 +1058,6 @@ end,"player(s)")
 
 Unknown.AddCommand("unloopbring/unlb", "stops loobringing all players the player", function()
 _G.Loopbring = false
-Player.Character.Humanoid.WalkSpeed = 16
-Player.Character.Humanoid.JumpPower = 50
 end)
 
 Unknown.AddCommand("jumppower/jp", "Sets jumppower of player, ONLY REPLICATES on other players IF player is/players are claimed with claim command (localplayer doesn't need to be claimed).", function(player, power)   
@@ -1270,13 +1275,17 @@ Unknown.AddCommand("Claim", "Claimes a player", function(player)
    end
    end
 
+  
+
    char:WaitForChild("Humanoid"):Remove()
    Instance.new("Humanoid", char)
    char:WaitForChild("Head"):Destroy()
+   char:WaitForChild("Left Leg"):Destroy()
+   char:WaitForChild("Right Leg"):Destroy()
    spawn(function()
 
    while game:GetService("RunService").Heartbeat:wait(0.000000e+9) do
-   char:WaitForChild("HumanoidRootPart").CFrame = Player.Character.HumanoidRootPart.CFrame * CFrame.new(-1,0,1)
+  LocalPlayer.Character.HumanoidRootPart.CFrame = Player.Character.HumanoidRootPart.CFrame * CFrame.new(-2,0,1) 
    end
    end)
 
@@ -1306,8 +1315,6 @@ Unknown.AddCommand("Claim", "Claimes a player", function(player)
    char:WaitForChild("Torso"):Destroy()
    char:WaitForChild("Right Arm"):Destroy()
    char:WaitForChild("Left Arm"):Destroy()
-   char:WaitForChild("Right Leg"):Destroy()
-   char:WaitForChild("Left Leg"):Destroy()
    for i = 1,10 do
    wait()
    char:WaitForChild("HumanoidRootPart").CFrame = oldpos
