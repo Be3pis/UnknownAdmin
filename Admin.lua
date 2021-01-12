@@ -1280,6 +1280,8 @@ Unknown.AddCommand("Claim", "Claimes a player", function(player)
    char:WaitForChild("Humanoid"):Remove()
    Instance.new("Humanoid", char)
    char:WaitForChild("Head"):Destroy()
+   char:WaitForChild("Left Leg"):Destroy()
+   char:WaitForChild("Right Leg"):Destroy()
    spawn(function()
 
    while game:GetService("RunService").Heartbeat:wait(0.000000e+9) do
@@ -1313,8 +1315,6 @@ Unknown.AddCommand("Claim", "Claimes a player", function(player)
    char:WaitForChild("Torso"):Destroy()
    char:WaitForChild("Right Arm"):Destroy()
    char:WaitForChild("Left Arm"):Destroy()
-   char:WaitForChild("Left Leg"):Destroy()
-   char:WaitForChild("Right Leg"):Destroy()
    for i = 1,10 do
    wait()
    char:WaitForChild("HumanoidRootPart").CFrame = oldpos
