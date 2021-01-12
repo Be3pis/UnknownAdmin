@@ -773,6 +773,7 @@ end)
 Unknown.AddCommand("respawn/re", "Respawns", function()
     local msg = Instance.new("Message", workspace)
     msg.Text = "Respawning..."
+    oldpos = LocalPlayer.Character.HumanoidRootPart.CFrame
     if LocalPlayer.Character:FindFirstChild("Humanoid") then
        LocalPlayer.Character:FindFirstChild("Humanoid"):Destroy()
     end
@@ -781,6 +782,11 @@ Unknown.AddCommand("respawn/re", "Respawns", function()
            v:Destroy()
         end
     end
+                repeat 
+                        wait()
+                until LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+                LocalPlayer.Character.HumanoidRootPart.CFrame = oldpos
+                
     wait()
     repeat
     wait()
