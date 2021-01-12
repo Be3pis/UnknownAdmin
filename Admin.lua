@@ -1259,71 +1259,51 @@ Unknown.AddCommand("Claim", "Claimes a player", function(player)
     local Player
     for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
    Player = v
-        local plr = game:GetService("Players").LocalPlayer
-   local char = plr.Character
-   local oldpos = char:WaitForChild("HumanoidRootPart").CFrame
-   local plr = game.Players.LocalPlayer;
-   local chr = plr.Character;
-   local hum = chr.Humanoid;
+     if Player and Player.Character and (Player.Character:FindFirstChild("Right Arm") and Player.Character:FindFirstChild("Right Arm"):IsA("BasePart") or Player.Character:FindFirstChild("Right Hand") and Player.Character:FindFirstChild("Right Hand"):IsA("BasePart")) then
+                        LocalPlayer.Character['Left Leg']:Destroy()
+                        LocalPlayer.Character['Right Leg']:Destroy()
+                        LocalPlayer.Character['Left Arm']:Destroy()
+                        wait(0.3544556)
 
-   workspace.FallenPartsDestroyHeight = 0/1/0
-                                
-                                
-   if not Player.Character:FindFirstChild("-Claimed") then
+                        if LocalPlayer.Character:FindFirstChildOfClass("Humanoid") then 
+                            LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):Destroy()
+                        end
+                        Instance.new("Humanoid").Parent = LocalPlayer.Character
+
+                        Tool.Parent = LocalPlayer.Character
+                        if Tool:FindFirstChild("Handle") and Player.Character.PrimaryPart ~= nil then
+                            repeat
+                                Player.Character:SetPrimaryPartCFrame(Tool.Handle.CFrame)
+                                game:GetService("RunService").Stepped:Wait()
+                            until Tool.Parent == Player.Character
+
+                            Workspace.FallenPartsDestroyHeight = 0/1/0
+                            local CurrentCFrame = LocalPlayer.Character.HumanoidRootPart.CFrame
+                            wait(0.3)
+
+                            for i = 1, 10 do
+                                LocalPlayer.Character.HumanoidRootPart.CFrame = CurrentCFrame - Vector3.new(0, math.huge, 0)
+                            end
+                            wait(0.3)
+
+                            for i = 1, 10 do
+                                LocalPlayer.Character.HumanoidRootPart.CFrame = CurrentCFrame
+                            end
+                            
+                            if not Player.Character:FindFirstChild("-Claimed") then
                                 local Claimed = Instance.new("ObjectValue")
                                 Claimed.Name = "-Claimed"
                                 Claimed.Parent = Player.Character
                             end
 
-   for i,v in pairs(plr.Backpack:GetChildren()) do
-   if v:IsA("Tool") then
-   v.Parent = char
-   end
-   end
-
-  
-
-   char:WaitForChild("Humanoid"):Remove()
-   Instance.new("Humanoid", char)
-   char:WaitForChild("Head"):Destroy()
-   char:WaitForChild("Left Leg"):Destroy()
-   char:WaitForChild("Right Leg"):Destroy()
-   spawn(function()
-
-   while game:GetService("RunService").Heartbeat:wait(0.000000e+9) do
-  LocalPlayer.Character.HumanoidRootPart.CFrame = Player.Character.HumanoidRootPart.CFrame * CFrame.new(-2,0,1) 
-   end
-   end)
-
-   for a,b in pairs(char:GetChildren()) do
-   if b:IsA("Tool") then
-   b.Parent = plr.Backpack
-   end
-   end
-
-   for _,x in pairs(plr.Backpack:GetChildren()) do
-   if x:IsA("Tool") then
-   x.Parent = char
-   end
-   end
-
-   for i = 1,10 do
-   wait(0.000000e+9)
-   char:WaitForChild("HumanoidRootPart").CFrame = CFrame.new(0,-99999999,0)
-   end
-
-   for i = 1,10 do
-   wait()
-   char:WaitForChild("HumanoidRootPart").CFrame = oldpos
-   end
-
-   char:WaitForChild("HumanoidRootPart"):Destroy()
-   char:WaitForChild("Torso"):Destroy()
-   char:WaitForChild("Right Arm"):Destroy()
-   char:WaitForChild("Left Arm"):Destroy()
-   for i = 1,10 do
-   wait()
-   char:WaitForChild("HumanoidRootPart").CFrame = oldpos
+                            LocalPlayer.CharacterAdded:Wait()
+                            repeat
+                                wait()
+                            until LocalPlayer.Character.HumanoidRootPart and LocalPlayer.Character:FindFirstChild("Head") and LocalPlayer.Character:FindFirstChild("Torso") and LocalPlayer.Character.Torso:FindFirstChild("Neck")
+                        
+                            if #IceGear.GetShortenedPlrFromName(player) > 1 then
+                                repeat wait() until LocalPlayer.Character:FindFirstChildOfClass("Tool") or LocalPlayer.Backpack:FindFirstChildOfClass("Tool")
+                            end
    end
     end
     else
