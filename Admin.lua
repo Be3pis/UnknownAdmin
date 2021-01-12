@@ -18,7 +18,7 @@ local Unknown = {
 
 local Settings = {
     Prefix = "?",
-    Version = "1.0.1"
+    Version = "2.0.0"
 }
 
 for i, v in pairs(game:GetService("CoreGui"):GetChildren()) do
@@ -1259,26 +1259,23 @@ Unknown.AddCommand("Claim", "Claimes a player", function(player)
     local Player
         for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
         Player = v
-          LocalPlayer.Character['Left Leg']:Destroy()
-          LocalPlayer.Character['Right Leg']:Destroy()
           local Tool = LocalPlayer.Character:FindFirstChildOfClass("Tool") or LocalPlayer.Backpack:FindFirstChildOfClass("Tool")
-          wait(0.3544556)
           if LocalPlayer.Character:FindFirstChildOfClass("Humanoid") then 
           LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):Destroy()
           end
           Instance.new("Humanoid").Parent = LocalPlayer.Character
-          LocalPlayer.Character:FindFirstChild("Head"):Destroy()
+          LocalPlayer.Character.Head:Destroy()
 
                         Tool.Parent = LocalPlayer.Character
                         if Tool:FindFirstChild("Handle") and Player.Character.PrimaryPart ~= nil then
                             repeat
-                                Player.Character:SetPrimaryPartCFrame(Tool.Handle.CFrame)
+                                LocalPlayer.Character.HumanoidRootPart.CFrame = Player.Character.HumanoidRootPart.CFrame * CFrame.new(-2,0,1    )
                                 game:GetService("RunService").Stepped:Wait()
                             until Tool.Parent == Player.Character
 
                             Workspace.FallenPartsDestroyHeight = 0/1/0
                             local CurrentCFrame = LocalPlayer.Character.HumanoidRootPart.CFrame
-                            wait(0.3)
+                            wait(0.1)
 
                             for i = 1, 10 do
                                 LocalPlayer.Character.HumanoidRootPart.CFrame = CurrentCFrame - Vector3.new(0, math.huge, 0)
@@ -1289,6 +1286,17 @@ Unknown.AddCommand("Claim", "Claimes a player", function(player)
                                 LocalPlayer.Character.HumanoidRootPart.CFrame = CurrentCFrame
                             end
                             
+                    
+    
+                            wait(.2)
+        
+                                           for i,v in pairs(LocalPlayer.Character:GetChildren()) do
+                           if v:IsA("Part") then
+                           v:Destroy()
+                           end
+                           end
+
+                
                             if not Player.Character:FindFirstChild("-Claimed") then
                                 local Claimed = Instance.new("ObjectValue")
                                 Claimed.Name = "-Claimed"
