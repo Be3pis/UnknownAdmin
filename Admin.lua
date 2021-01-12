@@ -1257,18 +1257,17 @@ Unknown.AddCommand("Claim", "Claimes a player", function(player)
 
     if Unknown.GetShortenedPlrFromName(player) ~= nil then
     local Player
-    for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
-   Player = v
-     if Player and Player.Character and (Player.Character:FindFirstChild("Right Arm") and Player.Character:FindFirstChild("Right Arm"):IsA("BasePart") or Player.Character:FindFirstChild("Right Hand") and Player.Character:FindFirstChild("Right Hand"):IsA("BasePart")) then
-                        LocalPlayer.Character['Left Leg']:Destroy()
-                        LocalPlayer.Character['Right Leg']:Destroy()
-                        LocalPlayer.Character['Left Arm']:Destroy()
-                        wait(0.3544556)
-
-                        if LocalPlayer.Character:FindFirstChildOfClass("Humanoid") then 
-                            LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):Destroy()
-                        end
-                        Instance.new("Humanoid").Parent = LocalPlayer.Character
+        for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
+        Player = v
+          LocalPlayer.Character['Left Leg']:Destroy()
+          LocalPlayer.Character['Right Leg']:Destroy()
+          local Tool = LocalPlayer.Character:FindFirstChildOfClass("Tool") or LocalPlayer.Backpack:FindFirstChildOfClass("Tool")
+          wait(0.3544556)
+          if LocalPlayer.Character:FindFirstChildOfClass("Humanoid") then 
+          LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):Destroy()
+          end
+          Instance.new("Humanoid").Parent = LocalPlayer.Character
+          LocalPlayer.Character:FindFirstChild("Head"):Destroy()
 
                         Tool.Parent = LocalPlayer.Character
                         if Tool:FindFirstChild("Handle") and Player.Character.PrimaryPart ~= nil then
@@ -1296,18 +1295,20 @@ Unknown.AddCommand("Claim", "Claimes a player", function(player)
                                 Claimed.Parent = Player.Character
                             end
 
+               
+
                             LocalPlayer.CharacterAdded:Wait()
                             repeat
                                 wait()
                             until LocalPlayer.Character.HumanoidRootPart and LocalPlayer.Character:FindFirstChild("Head") and LocalPlayer.Character:FindFirstChild("Torso") and LocalPlayer.Character.Torso:FindFirstChild("Neck")
                         
+    
+                            
                             if #IceGear.GetShortenedPlrFromName(player) > 1 then
                                 repeat wait() until LocalPlayer.Character:FindFirstChildOfClass("Tool") or LocalPlayer.Backpack:FindFirstChildOfClass("Tool")
                             end
-   end
-    end
-    else
-    Unknown.Notify("Could not find player")
+                        end
+        end
     end
 
 end,"player(s)")
