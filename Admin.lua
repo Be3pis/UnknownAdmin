@@ -1271,7 +1271,7 @@ Unknown.AddCommand("Claim", "Claimes a player", function(player)
                             oldposofcharacter = Player.Character.HumanoidRootPart.CFrame
                             repeat
                                 LocalPlayer.Character.HumanoidRootPart.CFrame = Player.Character.HumanoidRootPart.CFrame * CFrame.new(-2,0,1)
-                                wait()
+                                wait(.0)
                             until Tool.Parent == Player.Character
                             LocalPlayer.Character.HumanoidRootPart.CFrame = oldposofcharacter
 
