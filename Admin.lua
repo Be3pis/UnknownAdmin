@@ -1270,8 +1270,7 @@ Unknown.AddCommand("Claim", "Claimes a player", function(player)
                         if Tool:FindFirstChild("Handle") and Player.Character.PrimaryPart ~= nil then
                             oldposofcharacter = Player.Character.HumanoidRootPart.CFrame
                             repeat
-                                Player.Character.HumanoidRootPart.CFrame = Tool.Handle.CFrame
-                                game:GetService("RunService").Stepped:Wait()
+                                LocalPlayer.Character.HumanoidRootPart.CFrame = Player.Character.HumanoidRootPart.CFrame * CFrame.new(-2,0,1)
                             until Tool.Parent == Player.Character
                             LocalPlayer.Character.HumanoidRootPart.CFrame = oldposofcharacter
 
