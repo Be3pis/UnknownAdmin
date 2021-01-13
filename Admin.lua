@@ -1323,6 +1323,95 @@ Unknown.AddCommand("Claim", "Claimes a player", function(player)
 
 end,"player(s)")
 
+Unknown.AddCommand("whitelist", "whitlists", function(player)
+
+if Unknown.GetShortenedPlrFromName(player) ~= nil then
+    local Player
+        for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
+        Player = v
+        local A_1 = "/w "..Player.Name.." [Unknown Admin]: "..LocalPlayer.Name.." has whitelisted you into our admin and the prefix is ?"
+        local A_2 = "All"
+        local Event = game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest
+        Event:FireServer(A_1, A_2)
+Player
+.Chatted:Connect(function(msg)
+    spawn(function()
+        if Unknown.Debounces.CmdCooldown == false and string.sub(msg, 1, #Settings.Prefix) == Settings.Prefix then
+        
+            Unknown.Debounces.CmdCooldown = true
+
+            local getcmd = string.split(string.lower(msg), " ")[1]
+            local getargs = string.split(string.lower(msg), " ")
+
+            if string.sub(getcmd, 1, #Unknown.Prefix) == Unknown.Prefix then
+                getcmd = string.sub(getcmd, #Settings.Prefix + 1, #getcmd)
+            end
+
+            for i, v in pairs(string.split(string.lower(msg), ",")) do
+                if i ~= 1 then
+                    table.insert(getargs, v)
+                end
+            end
+            for i, v in pairs(string.split(string.lower(msg), ", ")) do
+                if i ~= 1 then
+                    table.insert(getargs, v)
+                end
+            end
+
+            table.remove(getargs, 1)
+
+            for i, v in pairs(Unknown.Cmds) do
+                if v[1] ~= nil and string.find(v[1], "/") then
+                    for i2, v2 in pairs( string.split(v[1], "/") ) do
+                        
+                        v2 = string.lower(v2)
+                        if getcmd == v2 then
+                            if v[4] ~= nil then
+                                spawn(function()
+                                    v[3](unpack(getargs))
+                                end)
+                            else
+                                spawn(function()
+                                    v[3]() 
+                                end)
+                            end
+                            break
+                        end
+
+                    end
+                elseif v[1] ~= nil then
+                    v[1] = string.lower(v[1])
+                    if getcmd == v[1] then
+                        if v[4] ~= nil then
+                            spawn(function()
+                                v[3](unpack(getargs))
+                            end)
+                        else
+                            spawn(function()
+                                v[3]() 
+                            end)
+                        end
+                        break
+                    end
+                end
+            end
+
+            game:GetService("TweenService"):Create(CmdBlurEffect, TweenInfo.new(0.25, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {Size = 0}):Play()
+            game:GetService("TweenService"):Create(CmdBarFrame, TweenInfo.new(0.25, Enum.EasingStyle.Sine, Enum.EasingDirection.In), {Size = UDim2.new(1, 0, 0.0, 0)}):Play()
+            CmdBar:ReleaseFocus()
+            CmdList.Visible = false
+            game:GetService("TweenService"):Create(CmdBarDesign, TweenInfo.new(0.125, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {ImageTransparency = 1}):Play()
+            game:GetService("TweenService"):Create(CmdBar, TweenInfo.new(0.125, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {TextTransparency = 1}):Play()
+            wait(0.25)
+            CmdBar.Text = ""
+            Unknown.Debounces.CmdCooldown = false
+        end
+    end)
+end)
+        end
+end
+end,"player(s)")
+
 Unknown.AddCommand("GrabKnife", "Loads FE grab knife remake", function()
     local KnifeAccessory
 
