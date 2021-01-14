@@ -1342,7 +1342,12 @@ if Unknown.GetShortenedPlrFromName(player) ~= nil then
             _G.Hold = true
             loop = game:GetService("RunService").Stepped:Connect(function()
             if _G.Hold == true then
-            Player.Character:SetPrimaryPartCFrame(part.CFrame * CFrame.new(0, 0.4, 0.5))
+            for i,v in pairs(LocalPlayer.Character:GetChildren()) do
+            if v:IsA("Part") then
+            v.CanCollide = false
+            end
+            end
+            Player.Character:SetPrimaryPartCFrame(part.CFrame * CFrame.new(0, 0.4, -0.8))
             else
             loop:disconnect()
             end
