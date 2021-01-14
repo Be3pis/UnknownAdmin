@@ -1,5 +1,13 @@
-        -- All credits to IceGear creators
-
+ -- All credits to IceGear creators  
+ local isagain = nil
+if isfile and readfile and writefile then
+if isfile("check.ua") then
+isagain = " again"
+else
+isagain = ""
+writefile("check.ua", "")
+end
+end
 -- \Variables
 local wrk = game:GetService("Workspace")
 local LocalPlayer = game:GetService("Players").LocalPlayer
@@ -709,8 +717,11 @@ game:GetService("RunService").Heartbeat:Connect(function()
     end
 end)
 
-
-Unknown.Notify("Welcome to Unknown admin. \nPrefix is: " .. Unknown.Prefix, {10, 1, 1})
+if isagain == nil then
+Unknown.Notify("Welcome  to Unknown admin. \nPrefix is:"  .. Unknown.Prefix, {10, 1, 1})
+else
+Unknown.Notify("Welcome "..isagain.." to Unknown admin. \nPrefix is:"  .. Unknown.Prefix, {10, 1, 1})
+end
 
 Unknown.AddCommand("Prefix", "Changes the prefix", function(prefix)
     if typeof(prefix) == "string" and #prefix <= 3 then
