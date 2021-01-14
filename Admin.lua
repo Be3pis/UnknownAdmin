@@ -7,6 +7,7 @@ local CoreGui = game:GetService("CoreGui")
 local Character = LocalPlayer.Character
 local name = LocalPlayer.Name
 _G.Loopbring = false
+_G.Hold = false
 
 local Unknown = {
     Cmds = {},
@@ -1322,6 +1323,40 @@ Unknown.AddCommand("Claim", "Claimes a player", function(player)
     end
 
 end,"player(s)")
+
+Unknown.AddCommand("hold", "holds", function(player)
+if Unknown.GetShortenedPlrFromName(player) ~= nil then
+    local Player
+        for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
+            Player = v
+            local tool = Instance.new("Tool", LocalPlayer.Backpack)
+            tool.Name = "Hold?"
+            local part = Instance.new("Part")
+            part.Parent = tool
+            part.Name = "Handle"
+            part.Anchored = false
+            part.CanCollide = false
+            part.Transparency = 1
+            wait()
+            tool.Parent = LocalPlayer.Character
+            _G.Hold = true
+            loop = game:GetService("RunService").Stepped:Connect(function()
+            if _G.Hold == true then
+            Player.Character:SetPrimaryPartCFrame(part.CFrame * CFrame.new(0, 0.4, 0.5))
+            else
+            loop:disconnect()
+            end
+            end)
+        end
+end
+end,"player(s)")
+
+Unknown.AddCommand("unhold", "unholds?", function()
+_G.Hold = false
+if LocalPlayer.Character:FindFirstChild("Hold?") then
+LocalPlayer.Character:FindFirstChild("Hold?"):Destroy()
+end
+end)
 
 Unknown.AddCommand("whitelist", "whitlists", function(player)
 
