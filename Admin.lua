@@ -16,6 +16,7 @@ local Character = LocalPlayer.Character
 local name = LocalPlayer.Name
 _G.Loopbring = false
 _G.Hold = false
+_G.Bang = false
 
 local Unknown = {
     Cmds = {},
@@ -1455,6 +1456,44 @@ end)
         end
 end
 end,"player(s)")
+
+Unknown.AddCommand("Bang", "do not ask about it", function(player)
+if Unknown.GetShortenedPlrFromName(player) ~= nil then
+    local Player
+        for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
+            Player = v
+            _G.Bang = true
+            localpl = game.Players.LocalPlayer            
+            bangAnim = Instance.new("Animation", localpl.Character)
+			bangAnim.AnimationId = "rbxassetid://148840371"
+			bang = localpl.Character.Humanoid:LoadAnimation(bangAnim)
+            bang:Play(.1, 1, 1)
+            bang:AdjustSpeed(5)
+            for i,v in pairs(localpl.Character:GetDescendants()) do
+            if v:IsA("Clothing") then
+            v:Destroy()
+            end
+            end
+            a = game:GetService("RunService").Stepped:Connect(function()
+            wait()
+            if _G.Bang == true then
+            Player.Character.HumanoidRootPart.CFrame = localpl.Character.HumanoidRootPart.CFrame * CFrame.new(0,0,-1.5)
+            else
+            bang.Looped = false
+            bang:Stop()
+            bang:Destroy()
+            bangAnim:Destroy()
+            a:disconnect()
+            end
+            end)
+            
+end
+end
+end,"player(s)")
+
+Unknown.AddCommand("unbang", "bruh", function()
+_G.Bang = false
+end)
 
 Unknown.AddCommand("GrabKnife", "Loads FE grab knife remake", function()
     local KnifeAccessory
