@@ -1304,11 +1304,7 @@ Unknown.AddCommand("Claim", "Claimes a player", function(player)
     
                             wait(.2)
         
-                                           for i,v in pairs(LocalPlayer.Character:GetChildren()) do
-                           if v:IsA("Part") then
-                           v:Destroy()
-                           end
-                           end
+                            LocalPlayer.Character:BreakJoints()
 
                 
                             if not Player.Character:FindFirstChild("-Claimed") then
