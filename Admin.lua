@@ -1051,20 +1051,26 @@ if Unknown.GetShortenedPlrFromName(player) ~= nil then
         for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
         Player = v
         _G.Loopbring = true
-        while _G.Loopbring do
-        wait()
-        if Player then
-        Player.Character.HumanoidRootPart.CFrame = LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(4.4,0,0)
+        local weld = Instance.new("Weld", Player.Character)
+        Char = Player.Character
+        local part = Instance.new("Part", workspace)
+        lplayer = LocalPlayer
+        part.Anchored = true
+        part.CanCollide = false
+        part.Transparency = 1
+        Char.HumanoidRootPart.CFrame = lplayer.Character.HumanoidRootPart.CFrame * CFrame.new(4.4,0,0)
+        weld.Part1 = Char.HumanoidRootPart
+        while wait() do
+        if _G.Loopbring then
+        part.CFrame = lplayer.Character.HumanoidRootPart.CFrame * CFrame.new(4.4,0,0)
+        weld.Part0 = part
         else
-        Unknown.Notify("Player left :(")
-        _G.Loopbring = false
-        end
-        if Player.Character.Humanoid.Health == 0 then
-        Unknown.Notify("Player reseted :(")
-        _G.Loopbring = false
+        weld:Destroy()
+        part:Destroy()
+        break
         end
         end
-        end
+end
 end
 end,"player(s)")
 
@@ -1342,6 +1348,9 @@ if Unknown.GetShortenedPlrFromName(player) ~= nil then
             part.Anchored = false
             part.CanCollide = false
             part.Transparency = 1
+            local weld = Instance.new("Weld", Player.Character)
+            Char = Player.Character
+            weld.Part1 = Char.HumanoidRootPart
             wait()
             tool.Parent = LocalPlayer.Character
             _G.Hold = true
@@ -1352,8 +1361,9 @@ if Unknown.GetShortenedPlrFromName(player) ~= nil then
             v.CanCollide = false
             end
             end
-            Player.Character:SetPrimaryPartCFrame(part.CFrame * CFrame.new(0, 0.4, -0.8))
+            weld.Part0 = part
             else
+            weld:Destroy()
             loop:disconnect()
             end
             end)
@@ -1475,15 +1485,26 @@ if Unknown.GetShortenedPlrFromName(player) ~= nil then
             v:Destroy()
             end
             end
+            
+            local lplayer = game:GetService("Players").LocalPlayer
+            local weld = Instance.new("Weld", Player.Character)
+Char = Player.Character
+local part = Instance.new("Part", workspace)
+part.Anchored = true
+part.CanCollide = false
+part.Transparency = 1
+Char.HumanoidRootPart.CFrame = lplayer.Character.HumanoidRootPart.CFrame * CFrame.new(4.4,0,0)
+weld.Part1 = Char.HumanoidRootPart
             a = game:GetService("RunService").Stepped:Connect(function()
             wait()
             if _G.Bang == true then
-            Player.Character.HumanoidRootPart.CFrame = localpl.Character.HumanoidRootPart.CFrame * CFrame.new(0,0,-1.5)
+            part.CFrame = localpl.Character.HumanoidRootPart.CFrame * CFrame.new(0,0,-1.5)
+            weld.Part0 = part
             else
+            part:Destroy()
+            weld:Destroy()
             bang.Looped = false
             bang:Stop()
-            bang:Destroy()
-            bangAnim:Destroy()
             a:disconnect()
             end
             end)
