@@ -1465,7 +1465,7 @@ if Unknown.GetShortenedPlrFromName(player) ~= nil then
             _G.Bang = true
             localpl = game.Players.LocalPlayer            
             bangAnim = Instance.new("Animation", localpl.Character)
-			bangAnim.AnimationId = "rbxassetid://6249070296"
+			bangAnim.AnimationId = "rbxassetid://148840371"
 			bang = localpl.Character.Humanoid:LoadAnimation(bangAnim)
             bang:Play(.1, 1, 1)
             bang:AdjustSpeed(5)
