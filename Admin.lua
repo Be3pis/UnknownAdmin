@@ -1344,9 +1344,6 @@ if Unknown.GetShortenedPlrFromName(player) ~= nil then
             part.Anchored = false
             part.CanCollide = false
             part.Transparency = 1
-            local weld = Instance.new("Weld", Player.Character)
-            Char = Player.Character
-            weld.Part1 = Char.HumanoidRootPart
             wait()
             tool.Parent = LocalPlayer.Character
             _G.Hold = true
@@ -1357,9 +1354,8 @@ if Unknown.GetShortenedPlrFromName(player) ~= nil then
             v.CanCollide = false
             end
             end
-            weld.Part0 = part
+            Player.Character.HumanoidRootPart.CFrame = part.CFrame
             else
-            weld:Destroy()
             loop:disconnect()
             end
             end)
