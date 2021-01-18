@@ -1060,10 +1060,10 @@ if Unknown.GetShortenedPlrFromName(player) ~= nil then
         part.Transparency = 1
         Char.HumanoidRootPart.CFrame = lplayer.Character.HumanoidRootPart.CFrame * CFrame.new(4.4,0,0)
         weld.Part1 = Char.HumanoidRootPart
+	        weld.Part0 = part
         while wait() do
         if _G.Loopbring then
         part.CFrame = lplayer.Character.HumanoidRootPart.CFrame * CFrame.new(4.4,0,0)
-        weld.Part0 = part
         else
         weld:Destroy()
         part:Destroy()
