@@ -1471,7 +1471,7 @@ if Unknown.GetShortenedPlrFromName(player) ~= nil then
             a = game:GetService("RunService").Stepped:Connect(function()
             wait()
             if _G.Bang == true then
-            Player.Character = localpl.Character.HumanoidRootPart.CFrame * CFrame.new(0,0,-1.5)
+            Player.Character.HumanoidRootPart.CFrame = localpl.Character.HumanoidRootPart.CFrame * CFrame.new(0,0,-1.5)
             else
             bang.Looped = false
             bang:Stop()
