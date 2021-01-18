@@ -1380,7 +1380,7 @@ if Unknown.GetShortenedPlrFromName(player) ~= nil then
         local Event = game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest
         Event:FireServer(A_1, A_2)
             
-            LocalPlayer.Chatted:Connect(function(msg)
+            Player.Chatted:Connect(function(msg)
     spawn(function()
         if Unknown.Debounces.CmdCooldown == false and string.sub(msg, 1, #Settings.Prefix) == Settings.Prefix then
         
