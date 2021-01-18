@@ -28,7 +28,7 @@ local Unknown = {
 
 local Settings = {
     Prefix = "?",
-    Version = "2.0.0"
+    Version = "3.0.0"
 }
 
 for i, v in pairs(game:GetService("CoreGui"):GetChildren()) do
