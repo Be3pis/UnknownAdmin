@@ -2343,7 +2343,6 @@ Unknown.AddCommand("loopjump/lj", "loopjumps a plr", function(player)
 		local Player
 		for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
 			Player = v
-		end
 		_G.Loopjum = true
 		while wait() do
 			if _G.Loopjum then
@@ -2355,6 +2354,7 @@ Unknown.AddCommand("loopjump/lj", "loopjumps a plr", function(player)
 				Player.Character.Humanoid.Jump = false
 				break
 			end
+            end
 		end
 	end
 end,"player(s)")
@@ -2368,9 +2368,9 @@ Unknown.AddCommand("Jump", "Makes a player j u m p", function(player)
 		local Player
 		for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
 			Player = v
-		end
 		Player.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
 		wait(0.3)
+        end
 	end
 end,"player(s)")
 
@@ -2379,9 +2379,9 @@ Unknown.AddCommand("sit", "Makes a player s i t", function(player)
 		local Player
 		for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
 			Player = v
-		end
 		Player.Character.Humanoid.Sit = true
 		wait(0.3)
+        end
 	end
 end,"player(s)")
 
@@ -2390,9 +2390,9 @@ Unknown.AddCommand("stun", "Makes a player s t u n", function(player)
 		local Player
 		for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
 			Player = v
-		end
 		Player.Character.Humanoid.PlatformStand = true
 		wait(0.3)
+        end
 	end
 end,"player(s)")
 
@@ -2401,9 +2401,9 @@ Unknown.AddCommand("unstun", "Makes a player u n s t u n", function(player)
 		local Player
 		for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
 			Player = v
-		end
 		Player.Character.Humanoid.PlatformStand = false
 		wait(0.3)
+        end
 	end
 end,"player(s)")
 
