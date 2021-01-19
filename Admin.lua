@@ -1276,7 +1276,7 @@ Unknown.AddCommand("fling"," flinmsg", function(player)
             
             Player.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
             wait()
-            game.Players.LocalPlayer.Character.Humanoid.Sit = true
+            Player.Character.Humanoid.Sit = true
 end
 end
 end,"player(s)")
