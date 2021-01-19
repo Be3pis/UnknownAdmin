@@ -1259,16 +1259,16 @@ Unknown.AddCommand("fling"," flinmsg", function(player)
 
 		for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
 			Player = v
-            local bodyForce = Instance.new("BodyForce")
-            bodyForce.Force = Vector3.new(math.random(1,10000),math.random(1,25000),math.random(1,10000))
-            bodyForce.Parent = Player.Character.HumanoidRootPart
-            wait()
-            
-            Player.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
-            wait()
-            Player.Character.Humanoid.Sit = true
-end
-end
+			local bodyForce = Instance.new("BodyForce")
+			bodyForce.Force = Vector3.new(math.random(1,10000),math.random(1,25000),math.random(1,10000))
+			bodyForce.Parent = Player.Character.HumanoidRootPart
+			wait()
+
+			Player.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+			wait()
+			Player.Character.Humanoid.Sit = true
+		end
+	end
 end,"player(s)")
 
 Unknown.AddCommand("kill", "Kills player, ONLY REPLICATES on other players IF player is/players are claimed with claim command (localplayer doesn't need to be claimed).", function(player)   
@@ -2278,43 +2278,134 @@ Unknown.AddCommand("dmode", "Yes.", function(player)
 		local Player
 		for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
 			Player = v
-end
-			SCIFIMOVIELOL(chara["Right Arm"], chara.HumanoidRootPart, Vector3.new(1.5, 1, 0), Vector3.new(60, 180, 180))
-			chara:FindFirstChild("Pal Hair").Handle["AccessoryWeld"]:Destroy()chara:FindFirstChild("LavanderHair").Handle["AccessoryWeld"]:Destroy();chara:FindFirstChild("Pink Hair").Handle["AccessoryWeld"]:Destroy();chara.Torso["Right Shoulder"]:Destroy()
-			chara:FindFirstChild("Pal Hair").Handle["Mesh"]:Destroy()chara:FindFirstChild("LavanderHair").Handle["Mesh"]:Destroy();chara:FindFirstChild("Pink Hair").Handle["Mesh"]:Destroy()
-			wait(0.2)
-			SCIFIMOVIELOL(chara:FindFirstChild("Pal Hair").Handle, chara["Right Arm"], Vector3.new(0, -1, 0), Vector3.new(0, 90, 0))
-			SCIFIMOVIELOL(chara:FindFirstChild("LavanderHair").Handle, chara["Right Arm"], Vector3.new(0, -2, 0), Vector3.new(90, 0, 0))
-			SCIFIMOVIELOL(chara:FindFirstChild("Pink Hair").Handle, chara["Right Arm"], Vector3.new(0, -4, 0), Vector3.new(90, 0, 0))
-			_G.dmode = true
-			local weld1 = Instance.new("Weld", Player.Character.HumanoidRootPart)
-			Char = Player.Character
-			local part11 = Instance.new("Part", workspace)
-			lplayer = LocalPlayer
-			part11.Anchored = true
-			part11.CanCollide = false
-			part11.Transparency = 1
-			Char.HumanoidRootPart.CFrame = lplayer.Character.HumanoidRootPart.CFrame * CFrame.new(1.5, 3.9, -3)
-			weld1.Part1 = Char.HumanoidRootPart
-SCIFIMOVIELOL(Player.Character.HumanoidRootPart, chara.HumanoidRootPart, Vector3.new(1.5, 3.9, -3), Vector3.new(0, 0, 0))
-			while wait() do
-				if _G.dmode then
-					Char.HumanoidRootPart.CFrame = chara.HumanoidRootPart.CFrame * CFrame.new(1.5, 3.9, -3)
-
-				else
-					weld1:Destroy()
-					part11:Destroy()
-					chara.Humanoid.Health = 0
-					break
-				end
-end
 		end
+		SCIFIMOVIELOL(chara["Right Arm"], chara.HumanoidRootPart, Vector3.new(1.5, 1, 0), Vector3.new(60, 180, 180))
+		chara:FindFirstChild("Pal Hair").Handle["AccessoryWeld"]:Destroy()chara:FindFirstChild("LavanderHair").Handle["AccessoryWeld"]:Destroy();chara:FindFirstChild("Pink Hair").Handle["AccessoryWeld"]:Destroy();chara.Torso["Right Shoulder"]:Destroy()
+		chara:FindFirstChild("Pal Hair").Handle["Mesh"]:Destroy()chara:FindFirstChild("LavanderHair").Handle["Mesh"]:Destroy();chara:FindFirstChild("Pink Hair").Handle["Mesh"]:Destroy()
+		wait(0.2)
+		SCIFIMOVIELOL(chara:FindFirstChild("Pal Hair").Handle, chara["Right Arm"], Vector3.new(0, -1, 0), Vector3.new(0, 90, 0))
+		SCIFIMOVIELOL(chara:FindFirstChild("LavanderHair").Handle, chara["Right Arm"], Vector3.new(0, -2, 0), Vector3.new(90, 0, 0))
+		SCIFIMOVIELOL(chara:FindFirstChild("Pink Hair").Handle, chara["Right Arm"], Vector3.new(0, -4, 0), Vector3.new(90, 0, 0))
+		_G.dmode = true
+		local weld1 = Instance.new("Weld", Player.Character.HumanoidRootPart)
+		Char = Player.Character
+		local part11 = Instance.new("Part", workspace)
+		lplayer = LocalPlayer
+		part11.Anchored = true
+		part11.CanCollide = false
+		part11.Transparency = 1
+		Char.HumanoidRootPart.CFrame = lplayer.Character.HumanoidRootPart.CFrame * CFrame.new(1.5, 3.9, -3)
+		weld1.Part1 = Char.HumanoidRootPart
+		SCIFIMOVIELOL(Player.Character.HumanoidRootPart, chara.HumanoidRootPart, Vector3.new(1.5, 3.9, -3), Vector3.new(0, 0, 0))
+		while wait() do
+			if _G.dmode then
+				Char.HumanoidRootPart.CFrame = chara.HumanoidRootPart.CFrame * CFrame.new(1.5, 3.9, -3)
+
+			else
+				weld1:Destroy()
+				part11:Destroy()
+				chara.Humanoid.Health = 0
+				break
+			end
+		end
+	end
 
 end,"player(s)")
 Unknown.AddCommand("undmode", "Undmode yes.", function()
 	_G.dmode = false
 end)
 
+Unknown.AddCommand("Freefall/ff", "FreeFalls a player", function(player)
+	if Unknown.GetShortenedPlrFromName(player) ~= nil then
+		local Player
+		for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
+			Player = v
+		end
+		Player.Character.HumanoidRootPart.CFrame = Player.Character.HumanoidRootPart.CFrame + Vector3.new(0, 20000, 0)
+	end
+end,"player(s)")
+
+Unknown.AddCommand("fling", "Flings a player", function(player)
+	if Unknown.GetShortenedPlrFromName(player) ~= nil then
+		local Player
+		for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
+			Player = v
+		end
+		local fall = Instance.new("BodyForce", Player.Character.HumanoidRootPart)
+		fall.Force = Player.Character.HumanoidRootPart.CFrame + Vector3.new(1000, -1000, 1000)
+		wait(10)
+		fall:Destroy()
+	end
+end,"player(s)")
+
+Unknown.AddCommand("loopjump/lj", "loopjumps a plr", function(player)
+	if Unknown.GetShortenedPlrFromName(player) ~= nil then
+		local Player
+		for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
+			Player = v
+		end
+		_G.Loopjum = true
+		while wait() do
+			if _G.Loopjum then
+				Player.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+                repeat
+                wait()
+                until Player.Character.Humanoid:GetState() == Enum.HumanoidStateType.Landed
+			else
+				Player.Character.Humanoid.Jump = false
+				break
+			end
+		end
+	end
+end,"player(s)")
+
+Unknown.AddCommand("Unloopjump/unlj", "Unloopjumps", function()
+	_G.Loopjum = false
+end)
+
+Unknown.AddCommand("Jump", "Makes a player j u m p", function(player)
+	if Unknown.GetShortenedPlrFromName(player) ~= nil then
+		local Player
+		for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
+			Player = v
+		end
+		Player.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+		wait(0.3)
+	end
+end,"player(s)")
+
+Unknown.AddCommand("sit", "Makes a player s i t", function(player)
+	if Unknown.GetShortenedPlrFromName(player) ~= nil then
+		local Player
+		for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
+			Player = v
+		end
+		Player.Character.Humanoid.Sit = true
+		wait(0.3)
+	end
+end,"player(s)")
+
+Unknown.AddCommand("stun", "Makes a player s t u n", function(player)
+	if Unknown.GetShortenedPlrFromName(player) ~= nil then
+		local Player
+		for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
+			Player = v
+		end
+		Player.Character.Humanoid.PlatformStand = true
+		wait(0.3)
+	end
+end,"player(s)")
+
+Unknown.AddCommand("unstun", "Makes a player u n s t u n", function(player)
+	if Unknown.GetShortenedPlrFromName(player) ~= nil then
+		local Player
+		for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
+			Player = v
+		end
+		Player.Character.Humanoid.PlatformStand = false
+		wait(0.3)
+	end
+end,"player(s)")
 
 
 
