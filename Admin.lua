@@ -1270,8 +1270,13 @@ Unknown.AddCommand("fling"," flinmsg", function(player)
 		for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
 			Player = v
             local bodyForce = Instance.new("BodyForce")
-            bodyForce.Force = Vector3.new(1000,100000,10000)
+            bodyForce.Force = Vector3.new(math.random(1,10000),math.random(1,25000),math.random(1,10000))
             bodyForce.Parent = Player.Character.HumanoidRootPart
+            wait()
+            
+            Player.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+            wait()
+            game.Players.LocalPlayer.Character.Humanoid.Sit = true
 end
 end
 end,"player(s)")
