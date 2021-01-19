@@ -1263,6 +1263,19 @@ Unknown.AddCommand("unchangestate", "Disables player changestate if player is st
 	end
 end, "player(s)")
 
+Unknown.AddCommand("fling"," flinmsg", function(player)
+	if Unknown.GetShortenedPlrFromName(player) ~= nil then
+		local Player
+
+		for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
+			Player = v
+            local bodyForce = Instance.new("BodyForce")
+            bodyForce.Force = Vector3.new(1000,100000,10000)
+            bodyForce.Parent = Player.Character.HumanoidRootPart
+end
+end
+end,"player(s)")
+
 Unknown.AddCommand("kill", "Kills player, ONLY REPLICATES on other players IF player is/players are claimed with claim command (localplayer doesn't need to be claimed).", function(player)   
 	if Unknown.GetShortenedPlrFromName(player) ~= nil then
 		local Player
