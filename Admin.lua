@@ -2461,7 +2461,7 @@ if _G.Gun then
 Player.Character.HumanoidRootPart.CFrame = pler.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, -1.2)
 else
 mousedown:disconnect()
-Player.Character:BreakJoints()
+LocalPlayer.Character:BreakJoints()
 break
 end
 end
