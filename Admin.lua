@@ -2273,6 +2273,7 @@ Unknown.AddCommand("Karambit", "Loads FE karambit", function()
 		Stuff = nil
 	end
 end)
+--[[
 Unknown.AddCommand("dmode", "Yes.", function(player)
 	local chara = game.Players.LocalPlayer.Character
 	if Unknown.GetShortenedPlrFromName(player) ~= nil then
@@ -2315,6 +2316,7 @@ end,"player(s)")
 Unknown.AddCommand("undmode", "Undmode yes.", function()
 	_G.dmode = false
 end)
+]]
 
 Unknown.AddCommand("Freefall/ff", "FreeFalls a player", function(player)
 	if Unknown.GetShortenedPlrFromName(player) ~= nil then
@@ -2407,7 +2409,7 @@ Unknown.AddCommand("unstun", "Makes a player u n s t u n", function(player)
 		end
 	end
 end,"player(s)")
-
+--[[
 Unknown.AddCommand("Grabgun", "grabs a player with a gun", function(player)
 	if Unknown.GetShortenedPlrFromName(player) ~= nil then
 		local Player
@@ -2474,6 +2476,7 @@ end,"player(s)")
 Unknown.AddCommand("Ungrabgun", "resets gun", function()
 _G.Gun = false
 end)
+]]
 
 
 
