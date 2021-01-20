@@ -18,6 +18,7 @@ _G.Loopbring = false
 _G.Hold = false
 _G.Bang = false
 _G.Gun = false
+_G.dmode = false
 
 local Unknown = {
 	Cmds = {},
