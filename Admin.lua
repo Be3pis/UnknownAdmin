@@ -2343,18 +2343,18 @@ Unknown.AddCommand("loopjump/lj", "loopjumps a plr", function(player)
 		local Player
 		for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
 			Player = v
-		_G.Loopjum = true
-		while wait() do
-			if _G.Loopjum then
-				Player.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
-                repeat
-                wait()
-                until Player.Character.Humanoid:GetState() == Enum.HumanoidStateType.Landed
-			else
-				Player.Character.Humanoid.Jump = false
-				break
+			_G.Loopjum = true
+			while wait() do
+				if _G.Loopjum then
+					Player.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+					repeat
+						wait()
+					until Player.Character.Humanoid:GetState() == Enum.HumanoidStateType.Landed
+				else
+					Player.Character.Humanoid.Jump = false
+					break
+				end
 			end
-            end
 		end
 	end
 end,"player(s)")
@@ -2368,9 +2368,9 @@ Unknown.AddCommand("Jump", "Makes a player j u m p", function(player)
 		local Player
 		for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
 			Player = v
-		Player.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
-		wait(0.3)
-        end
+			Player.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+			wait(0.3)
+		end
 	end
 end,"player(s)")
 
@@ -2379,9 +2379,9 @@ Unknown.AddCommand("sit", "Makes a player s i t", function(player)
 		local Player
 		for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
 			Player = v
-		Player.Character.Humanoid.Sit = true
-		wait(0.3)
-        end
+			Player.Character.Humanoid.Sit = true
+			wait(0.3)
+		end
 	end
 end,"player(s)")
 
@@ -2390,9 +2390,9 @@ Unknown.AddCommand("stun", "Makes a player s t u n", function(player)
 		local Player
 		for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
 			Player = v
-		Player.Character.Humanoid.PlatformStand = true
-		wait(0.3)
-        end
+			Player.Character.Humanoid.PlatformStand = true
+			wait(0.3)
+		end
 	end
 end,"player(s)")
 
@@ -2401,11 +2401,77 @@ Unknown.AddCommand("unstun", "Makes a player u n s t u n", function(player)
 		local Player
 		for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
 			Player = v
-		Player.Character.Humanoid.PlatformStand = false
-		wait(0.3)
-        end
+			Player.Character.Humanoid.PlatformStand = false
+			wait(0.3)
+		end
 	end
 end,"player(s)")
+
+Unknown.AddCommand("Grabgun", "grabs a player with a gun", function(player)
+	if Unknown.GetShortenedPlrFromName(player) ~= nil then
+		local Player
+		for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
+			Player = v
+		end
+		local pler = game.Players.LocalPlayer
+		if pler.Character:FindFirstChild("LavanderHair") and pler.Character:FindFirstChild("Pal Hair") then
+			pler.Character:FindFirstChild("LavanderHair").Handle:FindFirstChild("Mesh"):Destroy();pler.Character:FindFirstChild("Pal Hair").Handle:FindFirstChild("Mesh"):Destroy();pler.Character.Torso:FindFirstChild("Left Shoulder"):Destroy();pler.Character.Torso:FindFirstChild("Right Shoulder"):Destroy();pler.Character:FindFirstChild("LavanderHair").Handle:FindFirstChild("AccessoryWeld"):Destroy();pler.Character:FindFirstChild("Pal Hair").Handle:FindFirstChild("AccessoryWeld"):Destroy();
+			local lh = pler.Character:FindFirstChild("LavanderHair")
+			local ph = pler.Character:FindFirstChild("Pal Hair")
+			local rarm = pler.Character:FindFirstChild("Right Arm")
+			local larm = pler.Character:FindFirstChild("Left Arm")
+			local hrt = pler.Character.HumanoidRootPart
+			SCIFIMOVIELOL(lh.Handle, hrt, Vector3.new(3, 1.5, -1), Vector3.new(90, 90, 0))
+			SCIFIMOVIELOL(ph.Handle, hrt, Vector3.new(2, 2, -1), Vector3.new(0, -270, 0))
+			SCIFIMOVIELOL(larm, hrt, Vector3.new(-1.5, 0.6, 0), Vector3.new(90, 0, 0))
+			SCIFIMOVIELOL(rarm, hrt, Vector3.new(1.5, 1, 0), Vector3.new(45, 0, -270))
+			if Player.Character:FindFirstChild("-Noclipped") then
+				Player.Character:FindFirstChild("-Noclipped"):Destroy()
+			end
+
+			local Noclipped = Instance.new("ObjectValue")
+			Noclipped.Name = "-Noclipped"
+			Noclipped.Parent = Player.Character
+
+			mousedown = LocalPlayer:GetMouse().Button1Down:Connect(function()
+            if _G.Gun then
+			Player.Character:BreakJoints()
+            wait(2)
+			_G.Gun = false
+            LocalPlayer.Character:BreakJoints()
+            end
+			end)
+		
+			local LoopTillEnd
+			LoopTillEnd = game:GetService("RunService").Stepped:Connect(function()
+				if Player and Player.Character and Player.Character:FindFirstChild("-Noclipped") then
+					for i2, v2 in pairs(Player.Character:GetDescendants()) do
+						if v2:IsA("BasePart") then
+							v2.CanCollide = false
+						end
+					end
+				else
+					LoopTillEnd:Disconnect()
+				end
+			end)
+
+_G.Gun = true
+while wait() do
+if _G.Gun then
+Player.Character.HumanoidRootPart.CFrame = pler.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, -1.2)
+else
+mousedown:disconnect()
+break
+end
+end
+		end
+		
+	end
+end,"player(s)")
+
+Unknown.AddCommand("Ungrabgun", "resets gun", function()
+_G.Gun = false
+end)
 
 
 
