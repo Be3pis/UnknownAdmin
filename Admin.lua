@@ -17,6 +17,7 @@ local name = LocalPlayer.Name
 _G.Loopbring = false
 _G.Hold = false
 _G.Bang = false
+_G.Gun = false
 
 local Unknown = {
 	Cmds = {},
