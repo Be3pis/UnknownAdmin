@@ -1338,7 +1338,7 @@ Unknown.AddCommand("Claim", "Claimes a player", function(player)
 
 
 
-				wait(.2)
+				wait(.1)
 
 				LocalPlayer.Character:BreakJoints()
                 LocalPlayer.Character:WaitForChild("HumanoidRootPart"):Destroy()
