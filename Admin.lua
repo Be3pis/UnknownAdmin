@@ -1305,7 +1305,7 @@ end, "player(s)")
 Unknown.AddCommand("Claim", "Claimes a player", function(player)
 
 	if Unknown.GetShortenedPlrFromName(player) ~= nil then
-		local Player
+		local Player    
 		for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
 			Player = v
 			local Tool = LocalPlayer.Character:FindFirstChildOfClass("Tool") or LocalPlayer.Backpack:FindFirstChildOfClass("Tool")
@@ -1313,14 +1313,13 @@ Unknown.AddCommand("Claim", "Claimes a player", function(player)
 				LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):Destroy()
 			end
 			Instance.new("Humanoid").Parent = LocalPlayer.Character
-			LocalPlayer.Character.Head:Destroy()
 
 			Tool.Parent = LocalPlayer.Character
 			if Tool:FindFirstChild("Handle") and Player.Character.PrimaryPart ~= nil then
-				Workspace.FallenPartsDestroyHeight = 0/1/0
+				workspace.FallenPartsDestroyHeight = 0/1/0
 								local CurrentCFrame = LocalPlayer.Character.HumanoidRootPart.CFrame
 				repeat
-					LocalPlayer.Character.HumanoidRootPart.CFrame = CurrentCFrame - Vector3.new(0, 10000, 0)
+					LocalPlayer.Character.HumanoidRootPart.CFrame = CurrentCFrame - Vector3.new(0, 100000, 0)
 					Player.Character.HumanoidRootPart.CFrame = LocalPlayer.Character["Right Arm"].CFrame
 					wait()
 				until Tool.Parent == Player.Character
@@ -1328,10 +1327,18 @@ Unknown.AddCommand("Claim", "Claimes a player", function(player)
 				for i = 1, 10 do
 					LocalPlayer.Character.HumanoidRootPart.CFrame = CurrentCFrame
 				end
+                wait()
+                for i = 1, 10 do
+					LocalPlayer.Character.HumanoidRootPart.CFrame = CurrentCFrame - Vector3.new(0, math.huge, 0.)
+				end
+                wait()
+                	for i = 1, 10 do
+					LocalPlayer.Character.HumanoidRootPart.CFrame = CurrentCFrame
+				end
 
 
 
-				wait()
+				wait(.2)
 
 				LocalPlayer.Character:BreakJoints()
 
