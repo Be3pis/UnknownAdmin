@@ -1317,21 +1317,13 @@ Unknown.AddCommand("Claim", "Claimes a player", function(player)
 
 			Tool.Parent = LocalPlayer.Character
 			if Tool:FindFirstChild("Handle") and Player.Character.PrimaryPart ~= nil then
-				oldposofcharacter = Player.Character.HumanoidRootPart.CFrame
-				repeat
-					LocalPlayer.Character.HumanoidRootPart.CFrame = Player.Character.HumanoidRootPart.CFrame 
-					wait(.0)
-				until Tool.Parent == Player.Character
-				LocalPlayer.Character.HumanoidRootPart.CFrame = oldposofcharacter
-
 				Workspace.FallenPartsDestroyHeight = 0/1/0
-				local CurrentCFrame = LocalPlayer.Character.HumanoidRootPart.CFrame
-				wait(0.1)
-
-				for i = 1, 10 do
+								local CurrentCFrame = LocalPlayer.Character.HumanoidRootPart.CFrame
+				repeat
 					LocalPlayer.Character.HumanoidRootPart.CFrame = CurrentCFrame - Vector3.new(0, math.huge, 0)
-				end
-				wait(0.3)
+					Player.Character.HumanoidRootPart.CFrame = LocalPlayer.Character["Right Arm"].CFrame
+					wait()
+				until Tool.Parent == Player.Character
 
 				for i = 1, 10 do
 					LocalPlayer.Character.HumanoidRootPart.CFrame = CurrentCFrame
@@ -1339,7 +1331,7 @@ Unknown.AddCommand("Claim", "Claimes a player", function(player)
 
 
 
-				wait(.2)
+				wait()
 
 				LocalPlayer.Character:BreakJoints()
 
