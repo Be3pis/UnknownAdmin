@@ -1341,6 +1341,7 @@ Unknown.AddCommand("Claim", "Claimes a player", function(player)
 				wait(.2)
 
 				LocalPlayer.Character:BreakJoints()
+                LocalPlayer.Character:WaitForChild("HumanoidRootPart"):Destroy()
 
 
 				if not Player.Character:FindFirstChild("-Claimed") then
@@ -1354,7 +1355,7 @@ Unknown.AddCommand("Claim", "Claimes a player", function(player)
 					repeat 
 					wait()
 					until LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and LocalPlayer.Character:FindFirstChild("Head") and LocalPlayer.Character:FindFirstChild("Humanoid")
-					LocalPlayer.Character.HumanoidRootPart.CFrame = CurrentCFrame
+                    LocalPlayer.Character.HumanoidRootPart.CFrame = CurrentCFrame
 			end
 		end
 	end
