@@ -1351,16 +1351,10 @@ Unknown.AddCommand("Claim", "Claimes a player", function(player)
 
 
 
-				LocalPlayer.CharacterAdded:Wait()
-				repeat
+					repeat 
 					wait()
-				until LocalPlayer.Character.HumanoidRootPart and LocalPlayer.Character:FindFirstChild("Head") and LocalPlayer.Character:FindFirstChild("Torso") and LocalPlayer.Character.Torso:FindFirstChild("Neck")
-
-
-
-				if #IceGear.GetShortenedPlrFromName(player) > 1 then
-					repeat wait() until LocalPlayer.Character:FindFirstChildOfClass("Tool") or LocalPlayer.Backpack:FindFirstChildOfClass("Tool")
-				end
+					until LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+					LocalPlayer.Character.HumanoidRootPart.CFrame = CurrentCFrame
 			end
 		end
 	end
