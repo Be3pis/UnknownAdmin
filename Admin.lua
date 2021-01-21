@@ -1353,7 +1353,7 @@ Unknown.AddCommand("Claim", "Claimes a player", function(player)
 
 					repeat 
 					wait()
-					until LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+					until LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and LocalPlayer.Character:FindFirstChild("Head") and LocalPlayer.Character:FindFirstChild("Humanoid")
 					LocalPlayer.Character.HumanoidRootPart.CFrame = CurrentCFrame
 			end
 		end
