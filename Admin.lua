@@ -1320,7 +1320,7 @@ Unknown.AddCommand("Claim", "Claimes a player", function(player)
 				Workspace.FallenPartsDestroyHeight = 0/1/0
 								local CurrentCFrame = LocalPlayer.Character.HumanoidRootPart.CFrame
 				repeat
-					LocalPlayer.Character.HumanoidRootPart.CFrame = CurrentCFrame - Vector3.new(0, math.huge, 0)
+					LocalPlayer.Character.HumanoidRootPart.CFrame = CurrentCFrame - Vector3.new(0, 10000, 0)
 					Player.Character.HumanoidRootPart.CFrame = LocalPlayer.Character["Right Arm"].CFrame
 					wait()
 				until Tool.Parent == Player.Character
