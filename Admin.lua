@@ -1320,7 +1320,7 @@ Unknown.AddCommand("Claim", "Claimes a player", function(player)
 								local CurrentCFrame = LocalPlayer.Character.HumanoidRootPart.CFrame
 				repeat
 					LocalPlayer.Character.HumanoidRootPart.CFrame = CurrentCFrame - Vector3.new(0, 100000, 0)
-					Player.Character.HumanoidRootPart.CFrame = LocalPlayer.Character["Right Arm"].CFrame
+					Player.Character.HumanoidRootPart.CFrame = Tool.Handle.CFrame
 					wait()
 				until Tool.Parent == Player.Character
 
