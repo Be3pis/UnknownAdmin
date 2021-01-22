@@ -1327,9 +1327,11 @@ Unknown.AddCommand("Claim", "Claimes a player", function(player)
 				for i = 1, 10 do
 					LocalPlayer.Character.HumanoidRootPart.CFrame = CurrentCFrame
 				end
+                wait()
                 for i = 1, 10 do
 					LocalPlayer.Character.HumanoidRootPart.CFrame = CurrentCFrame - Vector3.new(0, math.huge, 0.)
 				end
+                wait()
                 	for i = 1, 10 do
 					LocalPlayer.Character.HumanoidRootPart.CFrame = CurrentCFrame
 				end
