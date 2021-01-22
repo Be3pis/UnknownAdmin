@@ -1336,7 +1336,7 @@ Unknown.AddCommand("Claim", "Claimes a player", function(player)
 
 
 
-				wait(.1)
+				wait(.2)
 
 				LocalPlayer.Character:BreakJoints()
 
