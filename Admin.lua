@@ -1082,6 +1082,10 @@ Unknown.AddCommand("loopbring/lb", "Loop brings the player", function(player)
 			_G.Loopbring = true
 			Char = Player.Character
 			lplayer = LocalPlayer
+            loopbr = Player.Character.Humanoid.Died:Connect(function()
+            _G.Loopbring = false
+            loopbr:disconnect()
+            end)
 			while wait() do
 				if _G.Loopbring then
 					Player.Character.HumanoidRootPart.CFrame = lplayer.Character.HumanoidRootPart.CFrame * CFrame.new(4.4,0,0)
@@ -1294,6 +1298,11 @@ Unknown.AddCommand("control", "controls player using claim", function(player)
 			Player = v
 			LocalPlayer.Character = Player.Character
 			workspace.CurrentCamera.CameraSubject = Player.Character.Humanoid
+            a = Player.Character.Humanoid.Died:Connect(function()
+            LocalPlayer.Character = workspace[name]
+			workspace.CurrentCamera.CameraSubject = workspace[name].Humanoid
+            a:disconnect()
+            end)
 		end
 	else
 		Unknown.Notify("Could not find player(s)", "Could not find player(s). perhaps username was/usernames were spelt wrong?", {5, 1, 1})
@@ -1307,34 +1316,42 @@ Unknown.AddCommand("Claim", "Claimes a player", function(player)
 	if Unknown.GetShortenedPlrFromName(player) ~= nil then
 		local Player    
 		for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
-			Player = v
+			local mes = Instance.new("Message", workspace)
+            mes.Text = "Preparing for faster claim bla bla"
+            for i,v in pairs(LocalPlayer.Character:GetDescendants()) do
+            v:Destroy()
+            end
+            repeat
+            wait()
+            until LocalPlayer.Character:FindFirstChild'HumanoidRootPart' and LocalPlayer.Character:FindFirstChild'Head' and LocalPlayer.Character:FindFirstChild'Humanoid'
+            mes:Destroy()
+            Player = v
 			local Tool = LocalPlayer.Character:FindFirstChildOfClass("Tool") or LocalPlayer.Backpack:FindFirstChildOfClass("Tool")
 			if LocalPlayer.Character:FindFirstChildOfClass("Humanoid") then 
 				LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):Destroy()
 			end
 			Instance.new("Humanoid").Parent = LocalPlayer.Character
-            LocalPlayer.Character:WaitForChild("Head"):Destroy()
 
 			Tool.Parent = LocalPlayer.Character
 			if Tool:FindFirstChild("Handle") and Player.Character.PrimaryPart ~= nil then
 				workspace.FallenPartsDestroyHeight = 0/1/0
 								local CurrentCFrame = LocalPlayer.Character.HumanoidRootPart.CFrame
 				repeat
-					LocalPlayer.Character.HumanoidRootPart.CFrame = CurrentCFrame + Vector3.new(0, math.huge, 0)
-					Player.Character.HumanoidRootPart.CFrame = LocalPlayer.Character["HumanoidRootPart"].CFrame * CFrame.new(0,2,0)
+					LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame = CurrentCFrame + Vector3.new(0, math.huge, 0)
+					Player.Character:WaitForChild'HumanoidRootPart'.CFrame = LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame * CFrame.new(0,2,0)
 					wait()
 				until Tool.Parent == Player.Character
 
 				for i = 1, 10 do
-					LocalPlayer.Character.HumanoidRootPart.CFrame = CurrentCFrame
+					LocalPlayer.Character:WaitForChild'HumanoidRootPart'.CFrame = CurrentCFrame
 				end
                 wait()
                 for i = 1, 10 do
-					LocalPlayer.Character.HumanoidRootPart.CFrame = CurrentCFrame - Vector3.new(0, math.huge, 0.)
+					LocalPlayer.Character:WaitForChild'HumanoidRootPart'.CFrame = CurrentCFrame - Vector3.new(0, math.huge, 0.)
 				end
                 wait()
                 	for i = 1, 10 do
-					LocalPlayer.Character.HumanoidRootPart.CFrame = CurrentCFrame
+					LocalPlayer.Character:WaitForChild'HumanoidRootPart'.CFrame = CurrentCFrame
 				end
 
 
@@ -1353,9 +1370,57 @@ Unknown.AddCommand("Claim", "Claimes a player", function(player)
 
 			end
 		end
+        else
+        Unknown.Notify("Could  not find da facking playor")
 	end
 
 end,"player(s)")
+
+Unknown.AddCommand("Blockhats/bhats", "block", function()
+for i,v in pairs(LocalPlayer.Character:GetChildren()) do
+if v:IsA("Accessory") then
+if v.Handle:FindFirstChildOfClass("Mesh") then
+v.Handle:FindFirstChildOfClass("Mesh"):Remove()
+end
+if v.Handle:FindFirstChildOfClass("SpecialMesh") then
+v.Handle:FindFirstChildOfClass("SpecialMesh"):Remove()
+end
+end
+end
+end)
+
+Unknown.AddCommand("EquipTools/et", "equip all", function()
+for i,v in pairs(LocalPlayer.Backpack:GetChildren()) do
+if v:IsA("Tool") then
+v.Parent = LocalPlayer.Character
+end
+end
+end)
+
+Unknown.AddCommand("UnequipTools/unet", "equip all", function()
+
+LocalPlayer.Character.Humanoid:UnequipTools()
+end)
+
+Unknown.AddCommand("rejoin/rj", "ok", function()
+game:GetService('TeleportService'):TeleportToPlaceInstance(game.PlaceId, game.JobId, LocalPlayer)
+end)
+
+Unknown.AddCommand("anticlaim", "haha", function()
+if LocalPlayer.Character:FindFirstChild("Right Arm") then
+LocalPlayer.Character:FindFirstChild("Right Arm"):Destroy()
+end
+end)
+
+Unknown.AddCommand("Blockhead/bhead", "ok", function()
+v = LocalPlayer.Character.Head
+if v:FindFirstChildOfClass("Mesh") then
+v:FindFirstChildOfClass("Mesh"):Remove()
+end
+if v:FindFirstChildOfClass("SpecialMesh") then
+v:FindFirstChildOfClass("SpecialMesh"):Remove()
+end
+end)
 
 Unknown.AddCommand("hold", "holds", function(player)
 	if Unknown.GetShortenedPlrFromName(player) ~= nil then
@@ -2398,6 +2463,31 @@ Unknown.AddCommand("unstun", "Makes a player u n s t u n", function(player)
 		end
 	end
 end,"player(s)")
+
+Unknown.AddCommand("drophats/dh",  "Drop", function()
+for i,v in pairs(LocalPlayer.Character:GetChildren()) do
+if v:IsA("Accessory") then
+v.Parent = workspace
+end
+end
+end)
+
+Unknown.AddCommand("droptools/dt","Drop", function()
+for i,v in pairs(LocalPlayer.Character:GetChildren()) do
+if v:IsA("Tool") then
+v.Parent = workspace
+end
+end
+for i,v in pairs(LocalPlayer.Backpack:GetChildren()) do
+if v:IsA("Tool") then
+LocalPlayer.Character.Humanoid:EquipTool(v)
+v.Parent = workspace
+end
+end
+end)
+
+
+
 Unknown.AddCommand("Grabgun", "grabs a player with a gun", function(player)
 	if Unknown.GetShortenedPlrFromName(player) ~= nil then
 		local Player
