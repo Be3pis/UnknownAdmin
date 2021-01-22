@@ -1313,14 +1313,15 @@ Unknown.AddCommand("Claim", "Claimes a player", function(player)
 				LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):Destroy()
 			end
 			Instance.new("Humanoid").Parent = LocalPlayer.Character
+            LocalPlayer.Character:WaitForChild("Head"):Destroy()
 
 			Tool.Parent = LocalPlayer.Character
 			if Tool:FindFirstChild("Handle") and Player.Character.PrimaryPart ~= nil then
 				workspace.FallenPartsDestroyHeight = 0/1/0
 								local CurrentCFrame = LocalPlayer.Character.HumanoidRootPart.CFrame
 				repeat
-					LocalPlayer.Character.HumanoidRootPart.CFrame = CurrentCFrame - Vector3.new(0, 100000, 0)
-					Player.Character.HumanoidRootPart.CFrame = LocalPlayer.Character["Head"].CFrame
+					LocalPlayer.Character.HumanoidRootPart.CFrame = CurrentCFrame + Vector3.new(0, math.huge, 0)
+					Player.Character.HumanoidRootPart.CFrame = LocalPlayer.Character["HumanoidRootPart"].CFrame * CFrame.new(0,2,0)
 					wait()
 				until Tool.Parent == Player.Character
 
