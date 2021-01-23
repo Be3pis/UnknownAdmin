@@ -561,8 +561,6 @@ Unknown.Events.InputBegan = game:GetService("UserInputService").InputBegan:Conne
 	if Key.KeyCode.Name == Unknown.CommandKey then
 		if Unknown.Debounces.CmdCooldown == false then
 			Unknown.Debounces.CmdCooldown = true
-
-			game:GetService("TweenService"):Create(CmdBlurEffect, TweenInfo.new(0.5, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {Size = 15}):Play()
 			game:GetService("TweenService"):Create(CmdBarFrame, TweenInfo.new(0.5, Enum.EasingStyle.Circular, Enum.EasingDirection.Out), {Size = UDim2.new(1, 0, 0.100000001, 0)}):Play()
 			wait(0.25)
 			CmdBar:CaptureFocus()
