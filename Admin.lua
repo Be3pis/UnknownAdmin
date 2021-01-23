@@ -835,6 +835,47 @@ Unknown.AddCommand("respawn/re", "Respawns", function()
 	until LocalPlayer.Character:FindFirstChildOfClass("Part")
 	msg:Destroy()
 end)
+Unknown.AddCommand("tweenbring/tb", "Tweenbrings", function(player)
+if Unknown.GetShortenedPlrFromName(player) ~= nil then
+		local Player
+		for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
+			Player = v
+            local ts = game:GetService("TweenService")
+            local Info = TweenInfo.new(1,Enum.EasingStyle.Linear,Enum.EasingDirection.Out)
+            local CFrametotp = { CFrame = LocalPlayer.Character.HumanoidRootPart.CFrame }
+             ts:Create(Player.Character.HumanoidRootPart, Info, CFrametotp):Play()
+
+end
+else
+Unknown.Notify("Could not find the player you are searching for.")
+end
+
+
+end,"player")
+
+
+Unknown.AddCommand("tweentp/ttp", "ttp", function(player1, player2)
+	if Unknown.GetShortenedPlrFromName(player1) ~= nil and Unknown.GetShortenedPlrFromName(player2) ~= nil then
+		local Player1
+		local Player2
+
+		for i, v in pairs(Unknown.GetShortenedPlrFromName(player1)) do
+			Player1 = v
+			for i2, v2 in pairs(Unknown.GetShortenedPlrFromName(player2)) do
+				Player2 = v2
+                 local ts = game:GetService("TweenService")
+            local Info = TweenInfo.new(1,Enum.EasingStyle.Linear,Enum.EasingDirection.Out)
+            local CFrametotp = { CFrame = Player2.Character.HumanoidRootPart.CFrame }
+             ts:Create(Player1.Character.HumanoidRootPart, Info, CFrametotp):Play()
+                
+end
+end
+end
+
+end,"player1 player2")
+
+
+
 Unknown.AddCommand("checknet/netcheck", "Notifies you about who is using networkownership", function()
 	local CheckIfWorks = pcall(function()
 		gethiddenproperty(LocalPlayer, "SimulationRadius")
@@ -1317,6 +1358,7 @@ Unknown.AddCommand("Claim", "Claimes a player", function(player)
 		local Player    
 		for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
 			local mes = Instance.new("Message", workspace)
+            local CurrentCFrame2 = LocalPlayer.Character.HumanoidRootPart.CFrame
             mes.Text = "Preparing for faster claim bla bla"
             for i,v in pairs(LocalPlayer.Character:GetDescendants()) do
             v:Destroy()
@@ -1325,6 +1367,7 @@ Unknown.AddCommand("Claim", "Claimes a player", function(player)
             wait()
             until LocalPlayer.Character:FindFirstChild'HumanoidRootPart' and LocalPlayer.Character:FindFirstChild'Head' and LocalPlayer.Character:FindFirstChild'Humanoid'
             mes:Destroy()
+            LocalPlayer.Character.HumanoidRootPart.CFrame = CurrentCFrame2
             Player = v
 			local Tool = LocalPlayer.Character:FindFirstChildOfClass("Tool") or LocalPlayer.Backpack:FindFirstChildOfClass("Tool")
 			if LocalPlayer.Character:FindFirstChildOfClass("Humanoid") then 
@@ -1335,7 +1378,7 @@ Unknown.AddCommand("Claim", "Claimes a player", function(player)
 			Tool.Parent = LocalPlayer.Character
 			if Tool:FindFirstChild("Handle") and Player.Character.PrimaryPart ~= nil then
 				workspace.FallenPartsDestroyHeight = 0/1/0
-								local CurrentCFrame = LocalPlayer.Character.HumanoidRootPart.CFrame
+								local CurrentCFrame = Player.Character.HumanoidRootPart.CFrame
 				repeat
 					LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame = CurrentCFrame + Vector3.new(0, math.huge, 0)
 					Player.Character:WaitForChild'HumanoidRootPart'.CFrame = LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame * CFrame.new(0,2,0)
@@ -1359,7 +1402,11 @@ Unknown.AddCommand("Claim", "Claimes a player", function(player)
 				wait(.2)
 
 				LocalPlayer.Character:BreakJoints()
-
+                LocalPlayer.Character:FindFirstChild'HumanoidRootPart':Destroy()
+                 repeat
+            wait()
+            until LocalPlayer.Character:FindFirstChild'HumanoidRootPart' and LocalPlayer.Character:FindFirstChild'Head' and LocalPlayer.Character:FindFirstChild'Humanoid'
+            LocalPlayer.Character:FindFirstChild'HumanoidRootPart'.CFrame = CurrentCFrame2
 
 				if not Player.Character:FindFirstChild("-Claimed") then
 					local Claimed = Instance.new("ObjectValue")
