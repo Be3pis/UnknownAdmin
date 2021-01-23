@@ -2602,6 +2602,86 @@ end)
 
 
 
+Unknown.AddCommand("chatlogs", "chat logs", function()
+for i,v in pairs(game.Players:GetPlayers()) do
+v.Chatted:Connect(function(msg)
+function logs(height,text,player)
+
+-- Instances:
+
+-- Gui to Lua
+-- Version: 3.2
+
+-- Instances:
+
+local Logs = Instance.new("ScreenGui")
+local ChatLogs = Instance.new("ImageLabel")
+local Player = Instance.new("TextLabel")
+local Text = Instance.new("TextLabel")
+local ChatLogs_2 = Instance.new("TextLabel")
+
+--Properties:
+
+Logs.Name = "Logs"
+Logs.Parent = game:GetService("CoreGui")
+
+ChatLogs.Name = "ChatLogs"
+ChatLogs.Parent = Logs
+ChatLogs.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ChatLogs.BackgroundTransparency = 1.000
+ChatLogs.Position = UDim2.new(0, 10, 0.0489999987, height)
+ChatLogs.Size = UDim2.new(0, 300, 0, 70)
+ChatLogs.Image = "rbxassetid://3570695787"
+ChatLogs.ScaleType = Enum.ScaleType.Slice
+ChatLogs.SliceCenter = Rect.new(100, 100, 100, 100)
+ChatLogs.SliceScale = 0.120
+
+Player.Name = "Player"
+Player.Parent = ChatLogs
+Player.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Player.BackgroundTransparency = 1.000
+Player.Position = UDim2.new(0.143333346, 0, 0.290000021, 0)
+Player.Size = UDim2.new(0, 200, 0, 20)
+Player.Font = Enum.Font.SourceSans
+Player.Text = player
+Player.TextColor3 = Color3.fromRGB(0, 0, 0)
+Player.TextScaled = true
+Player.TextSize = 14.000
+Player.TextWrapped = true
+
+Text.Name = "Text"
+Text.Parent = ChatLogs
+Text.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Text.BackgroundTransparency = 1.000
+Text.Position = UDim2.new(0.176666662, 0, 0.48999998, 0)
+Text.Size = UDim2.new(0, 180, 0, 25)
+Text.Font = Enum.Font.SourceSans
+Text.Text = text
+Text.TextColor3 = Color3.fromRGB(0, 0, 0)
+Text.TextScaled = true
+Text.TextSize = 14.000
+Text.TextWrapped = true
+
+ChatLogs_2.Name = "ChatLogs"
+ChatLogs_2.Parent = ChatLogs
+ChatLogs_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ChatLogs_2.BackgroundTransparency = 1.000
+ChatLogs_2.Position = UDim2.new(0.143333331, 0, 0, 0)
+ChatLogs_2.Size = UDim2.new(0, 200, 0, 29)
+ChatLogs_2.Font = Enum.Font.SourceSans
+ChatLogs_2.Text = "Chat Logs"
+ChatLogs_2.TextColor3 = Color3.fromRGB(0, 0, 0)
+ChatLogs_2.TextScaled = true
+ChatLogs_2.TextSize = 14.000
+ChatLogs_2.TextWrapped = true
+wait(4)
+ChatLogs:Destroy()
+end
+
+logs(570,msg,v.Name)
+end)
+end
+end)
 
 -- updating cmdlist
 
