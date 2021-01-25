@@ -1354,7 +1354,7 @@ Unknown.AddCommand("claim", "Claims player with networkownership.", function(pla
         for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
            if v:IsA("Part") then v:Remove() end
         end
-        repeat wait() until LocalPlayer.Character:FindFirstChild("Humanoid")
+        repeat wait() until LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
         local Player
 
         if LocalPlayer and LocalPlayer.Character and (LocalPlayer.Character:FindFirstChild("Right Arm") and LocalPlayer.Character:FindFirstChild("Right Arm"):IsA("BasePart") or LocalPlayer.Character:FindFirstChild("Right Hand") and LocalPlayer.Character:FindFirstChild("Right Hand"):IsA("BasePart")) then
