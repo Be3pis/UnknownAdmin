@@ -1349,13 +1349,13 @@ Unknown.AddCommand("control", "controls player using claim", function(player)
 end, "player(s)")
 
 
-
 Unknown.AddCommand("claim", "Claims player with networkownership.", function(player)   
     if Unknown.GetShortenedPlrFromName(player) ~= nil then
         for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
-            v:Remove()
+            if v:IsA("Part") then v:Remove()
+            end
         end
-        repeat wait() until LocalPlayer.Character:FindFirstChild("Humanoid")
+        wait(6.7)
         local Player
 
         if LocalPlayer and LocalPlayer.Character and (LocalPlayer.Character:FindFirstChild("Right Arm") and LocalPlayer.Character:FindFirstChild("Right Arm"):IsA("BasePart") or LocalPlayer.Character:FindFirstChild("Right Hand") and LocalPlayer.Character:FindFirstChild("Right Hand"):IsA("BasePart")) then
@@ -1366,12 +1366,16 @@ Unknown.AddCommand("claim", "Claims player with networkownership.", function(pla
                 for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
                     Player = v
                     if Player and Player.Character and (Player.Character:FindFirstChild("Right Arm") and Player.Character:FindFirstChild("Right Arm"):IsA("BasePart") or Player.Character:FindFirstChild("Right Hand") and Player.Character:FindFirstChild("Right Hand"):IsA("BasePart")) then
-                  
+                        LocalPlayer.Character['Left Leg']:Destroy()
+                        LocalPlayer.Character['Right Leg']:Destroy()
+                        LocalPlayer.Character['Left Arm']:Destroy()
+                        wait(0.3544556)
 
                         if LocalPlayer.Character:FindFirstChildOfClass("Humanoid") then 
                             LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):Destroy()
                         end
                         Instance.new("Humanoid").Parent = LocalPlayer.Character
+
                         Tool.Parent = LocalPlayer.Character
                         if Tool:FindFirstChild("Handle") and Player.Character.PrimaryPart ~= nil then
                             repeat
@@ -1381,12 +1385,12 @@ Unknown.AddCommand("claim", "Claims player with networkownership.", function(pla
 
                             Workspace.FallenPartsDestroyHeight = 0/1/0
                             local CurrentCFrame = LocalPlayer.Character.HumanoidRootPart.CFrame
-                            wait(0.1)
+                            wait(0.3)
 
                             for i = 1, 10 do
                                 LocalPlayer.Character.HumanoidRootPart.CFrame = CurrentCFrame - Vector3.new(0, math.huge, 0)
                             end
-                            wait(0.1)
+                            wait(0.3)
 
                             for i = 1, 10 do
                                 LocalPlayer.Character.HumanoidRootPart.CFrame = CurrentCFrame
@@ -1398,7 +1402,14 @@ Unknown.AddCommand("claim", "Claims player with networkownership.", function(pla
                                 Claimed.Parent = Player.Character
                             end
 
- 
+                            LocalPlayer.CharacterAdded:Wait()
+                            repeat
+                                wait()
+                            until LocalPlayer.Character.HumanoidRootPart and LocalPlayer.Character:FindFirstChild("Head") and LocalPlayer.Character:FindFirstChild("Torso") and LocalPlayer.Character.Torso:FindFirstChild("Neck")
+                        
+                            if #Unknown.GetShortenedPlrFromName(player) > 1 then
+                                repeat wait() until LocalPlayer.Character:FindFirstChildOfClass("Tool") or LocalPlayer.Backpack:FindFirstChildOfClass("Tool")
+                            end
                         end
                     end
                 end
@@ -1410,6 +1421,7 @@ Unknown.AddCommand("claim", "Claims player with networkownership.", function(pla
         Unknown.Notify("Could not find player(s)", "Could not find player(s). perhaps username was/usernames were spelt wrong?", {5, 1, 1})
     end
 end, "player(s)")
+
 
 Unknown.AddCommand("Blockhats/bhats", "block", function()
 for i,v in pairs(LocalPlayer.Character:GetChildren()) do
