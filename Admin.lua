@@ -1352,10 +1352,9 @@ end, "player(s)")
 Unknown.AddCommand("claim", "Claims player with networkownership.", function(player)   
     if Unknown.GetShortenedPlrFromName(player) ~= nil then
         for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
-            if v:IsA("Part") then v:Remove()
-            end
+           if v:IsA("Part") then v:Remove() end
         end
-        wait(6.7)
+        repeat wait() until LocalPlayer.Character:FindFirstChild("Humanoid")
         local Player
 
         if LocalPlayer and LocalPlayer.Character and (LocalPlayer.Character:FindFirstChild("Right Arm") and LocalPlayer.Character:FindFirstChild("Right Arm"):IsA("BasePart") or LocalPlayer.Character:FindFirstChild("Right Hand") and LocalPlayer.Character:FindFirstChild("Right Hand"):IsA("BasePart")) then
@@ -1369,7 +1368,7 @@ Unknown.AddCommand("claim", "Claims player with networkownership.", function(pla
                         LocalPlayer.Character['Left Leg']:Destroy()
                         LocalPlayer.Character['Right Leg']:Destroy()
                         LocalPlayer.Character['Left Arm']:Destroy()
-                        wait(0.3544556)
+    
 
                         if LocalPlayer.Character:FindFirstChildOfClass("Humanoid") then 
                             LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):Destroy()
