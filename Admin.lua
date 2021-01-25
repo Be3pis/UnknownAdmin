@@ -1348,13 +1348,14 @@ Unknown.AddCommand("control", "controls player using claim", function(player)
 	end
 end, "player(s)")
 
-
-Unknown.AddCommand("claim", "Claims player with networkownership.", function(player)   
-    if Unknown.GetShortenedPlrFromName(player) ~= nil then
+IceGear = Unknown
+IceGear.AddCommand("claim", "Claims player with networkownership.", function(player)   
+    if IceGear.GetShortenedPlrFromName(player) ~= nil then
         for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
-           if v:IsA("Part") then v:Remove() end
+            if v:IsA("Part") then v:Remove()
+            end
         end
-        repeat wait() until LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+        wait(6.7)
         local Player
 
         if LocalPlayer and LocalPlayer.Character and (LocalPlayer.Character:FindFirstChild("Right Arm") and LocalPlayer.Character:FindFirstChild("Right Arm"):IsA("BasePart") or LocalPlayer.Character:FindFirstChild("Right Hand") and LocalPlayer.Character:FindFirstChild("Right Hand"):IsA("BasePart")) then
@@ -1362,13 +1363,13 @@ Unknown.AddCommand("claim", "Claims player with networkownership.", function(pla
                 local Tool = LocalPlayer.Character:FindFirstChildOfClass("Tool") or LocalPlayer.Backpack:FindFirstChildOfClass("Tool")
                 
             
-                for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
+                for i, v in pairs(IceGear.GetShortenedPlrFromName(player)) do
                     Player = v
                     if Player and Player.Character and (Player.Character:FindFirstChild("Right Arm") and Player.Character:FindFirstChild("Right Arm"):IsA("BasePart") or Player.Character:FindFirstChild("Right Hand") and Player.Character:FindFirstChild("Right Hand"):IsA("BasePart")) then
                         LocalPlayer.Character['Left Leg']:Destroy()
                         LocalPlayer.Character['Right Leg']:Destroy()
                         LocalPlayer.Character['Left Arm']:Destroy()
-    
+                        wait(0.3544556)
 
                         if LocalPlayer.Character:FindFirstChildOfClass("Humanoid") then 
                             LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):Destroy()
@@ -1406,20 +1407,21 @@ Unknown.AddCommand("claim", "Claims player with networkownership.", function(pla
                                 wait()
                             until LocalPlayer.Character.HumanoidRootPart and LocalPlayer.Character:FindFirstChild("Head") and LocalPlayer.Character:FindFirstChild("Torso") and LocalPlayer.Character.Torso:FindFirstChild("Neck")
                         
-                            if #Unknown.GetShortenedPlrFromName(player) > 1 then
+                            if #IceGear.GetShortenedPlrFromName(player) > 1 then
                                 repeat wait() until LocalPlayer.Character:FindFirstChildOfClass("Tool") or LocalPlayer.Backpack:FindFirstChildOfClass("Tool")
                             end
                         end
                     end
                 end
             else
-                return Unknown.Notify("Need 1 tool", "You need at least 1 tool in order to claim player", {5, 1, 1})
+                return IceGear.Notify("Need 1 tool", "You need at least 1 tool in order to claim player", {5, 1, 1})
             end
         end
     else
-        Unknown.Notify("Could not find player(s)", "Could not find player(s). perhaps username was/usernames were spelt wrong?", {5, 1, 1})
+        IceGear.Notify("Could not find player(s)", "Could not find player(s). perhaps username was/usernames were spelt wrong?", {5, 1, 1})
     end
 end, "player(s)")
+
 
 
 Unknown.AddCommand("Blockhats/bhats", "block", function()
