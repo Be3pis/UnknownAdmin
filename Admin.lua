@@ -290,7 +290,7 @@ print(Target.Name)
 				workspace.FallenPartsDestroyHeight = 0/1/0
 								local CurrentCFrame = Player.Character.HumanoidRootPart.CFrame
 				repeat
-					LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame = CurrentCFrame + Vector3.new(0, 100000, 0)
+					LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame = CurrentCFrame + Vector3.new(0, math.huge, 0)
 					Player.Character:SetPrimaryPartCFrame(LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame * CFrame.new(0,2,0))
 					wait()
 				until Tool.Parent == Player.Character
