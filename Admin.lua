@@ -265,6 +265,7 @@ Target.Character:SetPrimaryPartCFrame(LocalPlayer.Character.HumanoidRootPart.CFr
 end
 commands.claim = function(Target)
 Target = FindPlayer(Target)
+	if Target then
 print(Target.Name)
 		local mes = Instance.new("Message", workspace)
             local CurrentCFrame2 = LocalPlayer.Character.HumanoidRootPart.CFrame
@@ -321,6 +322,9 @@ print(Target.Name)
 
 
 			end
+			else
+			notfiy("not find player")
+		end
 
 end
 
