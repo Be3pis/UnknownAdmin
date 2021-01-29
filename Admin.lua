@@ -1430,7 +1430,7 @@ Unknown.AddCommand("claim", "Claims player with networkownership.", function(pla
 
         if LocalPlayer and LocalPlayer.Character and (LocalPlayer.Character:FindFirstChild("Right Arm") and LocalPlayer.Character:FindFirstChild("Right Arm"):IsA("BasePart") or LocalPlayer.Character:FindFirstChild("Right Hand") and LocalPlayer.Character:FindFirstChild("Right Hand"):IsA("BasePart")) then
             if LocalPlayer.Character:FindFirstChildOfClass("Tool") or LocalPlayer.Backpack:FindFirstChildOfClass("Tool") then
-                local Tool = LocalPlayer.Character:FindFirstChildOfClass("Tool") or LocalPlayer.Backpack:FindFirstChildOfClass("Tool")
+               
                 
             
                     if Player and Player.Character and (Player.Character:FindFirstChild("Right Arm") and Player.Character:FindFirstChild("Right Arm"):IsA("BasePart") or Player.Character:FindFirstChild("Right Hand") and Player.Character:FindFirstChild("Right Hand"):IsA("BasePart")) then
@@ -1438,7 +1438,7 @@ Unknown.AddCommand("claim", "Claims player with networkownership.", function(pla
 								for i,v in pairs(LocalPlayer.Character:GetChildren()) do v:Destroy() end
 				repeat wait() until LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
 				LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame = pos
-
+                         local Tool = LocalPlayer.Character:FindFirstChildOfClass("Tool") or LocalPlayer.Backpack:FindFirstChildOfClass("Tool")
                         if LocalPlayer.Character:FindFirstChildOfClass("Humanoid") then 
                             LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):Destroy()
                         end
