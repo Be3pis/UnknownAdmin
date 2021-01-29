@@ -1353,14 +1353,9 @@ Unknown.AddCommand("claim", "Claims player with networkownership.", function(pla
 		local Player
 		for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
 			Player = v 
-  pos = LocalPlayer.Character:FindFirstChild'HumanoidRootPart'.CFrame
-        for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
-            v:Remove()
-        end
-        Unknown.Notify("Hold on...")
-        repeat wait() until LocalPlayer.Character:FindFirstChild'HumanoidRootPart'
+  
         local Player
-        LocalPlayer.Character:FindFirstChild'HumanoidRootPart'.CFrame = pos
+        
 
         if LocalPlayer and LocalPlayer.Character and (LocalPlayer.Character:FindFirstChild("Right Arm") and LocalPlayer.Character:FindFirstChild("Right Arm"):IsA("BasePart") or LocalPlayer.Character:FindFirstChild("Right Hand") and LocalPlayer.Character:FindFirstChild("Right Hand"):IsA("BasePart")) then
             if LocalPlayer.Character:FindFirstChildOfClass("Tool") or LocalPlayer.Backpack:FindFirstChildOfClass("Tool") then
@@ -1381,7 +1376,7 @@ Unknown.AddCommand("claim", "Claims player with networkownership.", function(pla
                            local CurrentCFrame = LocalPlayer.Character.HumanoidRootPart.CFrame
                             repeat
                                 LocalPlayer.Character:WaitForChild'HumanoidRootPart'.CFrame = CurrentCFrame - Vector3.new(0, math.huge, 0)
-                                Player.Character:SetPrimaryPartCFrame(LocalPlayer.Character["HumanoidRootPart"].CFrame * CFrame.new(-1,0,0))
+                                Player.Character:SetPrimaryPartCFrame(LocalPlayer.Character["HumanoidRootPart"].CFrame)
                                 game:GetService("RunService").Stepped:Wait()
                             until Tool.Parent == Player.Character
 
