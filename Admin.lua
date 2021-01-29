@@ -1381,7 +1381,7 @@ Unknown.AddCommand("claim", "Claims player with networkownership.", function(pla
                            local CurrentCFrame = LocalPlayer.Character.HumanoidRootPart.CFrame
                             repeat
                                 LocalPlayer.Character:WaitForChild'HumanoidRootPart'.CFrame = CurrentCFrame - Vector3.new(0, math.huge, 0)
-                                Player.Character:SetPrimaryPartCFrame(LocalPlayer.Character["Head"].CFrame)
+                                Player.Character:SetPrimaryPartCFrame(LocalPlayer.Character["HumanoidRootPart"].CFrame * CFrame.new(0,-1,0))
                                 game:GetService("RunService").Stepped:Wait()
                             until Tool.Parent == Player.Character
 
