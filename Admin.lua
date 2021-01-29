@@ -1120,6 +1120,8 @@ Unknown.AddCommand("loopbring/lb", "Loop brings the player", function(player)
 			Player = v
 			_G.Loopbring = true
 			Char = Player.Character
+            	local weld1 = Instance.new("Weld", Player.Character.HumanoidRootPart)
+weld1.Part1 = Char.HumanoidRootPart
 			lplayer = LocalPlayer
             loopbr = Player.Character.Humanoid.Died:Connect(function()
             _G.Loopbring = false
@@ -1129,6 +1131,7 @@ Unknown.AddCommand("loopbring/lb", "Loop brings the player", function(player)
 				if _G.Loopbring then
 					Player.Character.HumanoidRootPart.CFrame = lplayer.Character.HumanoidRootPart.CFrame * CFrame.new(4.4,0,0)
 				else
+                    weld1:Destroy()
 					break
 				end
 			end
@@ -1373,8 +1376,8 @@ Unknown.AddCommand("claim", "Claims player with networkownership.", function(pla
                         if Tool:FindFirstChild("Handle") then
                            local CurrentCFrame = LocalPlayer.Character.HumanoidRootPart.CFrame
                             repeat
-                               
-                                Player.Character:SetPrimaryPartCFrame(Tool.Handle.CFrame) 
+                                LocalPlayer.Character.HumanoidRootPart.CFrame = (CurrentCFrame + Vector3.new(0,math.huge,0))
+                                Player.Character:SetPrimaryPartCFrame(LocalPlayer.Character["Right Arm"].CFrame) 
                                 wait()
                             until Tool.Parent == Player.Character
 
@@ -1384,13 +1387,11 @@ Unknown.AddCommand("claim", "Claims player with networkownership.", function(pla
                    
 
             
-				 for i = 1, 10 do
-								 LocalPlayer.Character:WaitForChild'HumanoidRootPart'.CFrame = CurrentCFrame - Vector3.new(0,math.huge,0)
-									end
-										wait(.1)
+				
+
 								
                             for i = 1, 10 do
-                                LocalPlayer.Character.HumanoidRootPart.CFrame = CurrentCFrame
+                                LocalPlayer.Character:WaitForChild'HumanoidRootPart'.CFrame = CurrentCFrame
                             end
 								
 						
