@@ -1354,7 +1354,6 @@ Unknown.AddCommand("claim", "Claims player with networkownership.", function(pla
 		for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
 			Player = v 
   
-        local Player
         
 
         if LocalPlayer and LocalPlayer.Character and (LocalPlayer.Character:FindFirstChild("Right Arm") and LocalPlayer.Character:FindFirstChild("Right Arm"):IsA("BasePart") or LocalPlayer.Character:FindFirstChild("Right Hand") and LocalPlayer.Character:FindFirstChild("Right Hand"):IsA("BasePart")) then
@@ -1362,7 +1361,6 @@ Unknown.AddCommand("claim", "Claims player with networkownership.", function(pla
                 local Tool = LocalPlayer.Character:FindFirstChildOfClass("Tool") or LocalPlayer.Backpack:FindFirstChildOfClass("Tool")
                 
             
-                    Player = v
                     if Player and Player.Character and (Player.Character:FindFirstChild("Right Arm") and Player.Character:FindFirstChild("Right Arm"):IsA("BasePart") or Player.Character:FindFirstChild("Right Hand") and Player.Character:FindFirstChild("Right Hand"):IsA("BasePart")) then
      
 
@@ -1371,16 +1369,16 @@ Unknown.AddCommand("claim", "Claims player with networkownership.", function(pla
                         end
                         Instance.new("Humanoid").Parent = LocalPlayer.Character
 
-                        Tool.Parent = LocalPlayer.Character
-                        if Tool:FindFirstChild("Handle") and Player.Character.PrimaryPart ~= nil then
+                        LocalPlayer.Character.Humanoid:EquipTool(Tool)
+                        if Tool:FindFirstChild("Handle") then
                            local CurrentCFrame = LocalPlayer.Character.HumanoidRootPart.CFrame
                             repeat
-                                LocalPlayer.Character:WaitForChild'HumanoidRootPart'.CFrame = CurrentCFrame - Vector3.new(0,math.huge,0)
-                                Player.Character:SetPrimaryPartCFrame(LocalPlayer.Character["HumanoidRootPart"].CFrame * CFrame.new(0,2,0))
-                                game:GetService("RunService").Stepped:Wait()
+                                LocalPlayer.Character:WaitForChild'HumanoidRootPart'.CFrame = CurrentCFrame + Vector3.new(0,math.huge,0)
+                                Player.Character.HumanoidRootPart.CFrame = LocalPlayer.Character["Head"].CFrame 
+                                wait()
                             until Tool.Parent == Player.Character
 
-                            Workspace.FallenPartsDestroyHeight = 0/1/0
+                            workspace.FallenPartsDestroyHeight = 0/1/0
                            
 
                    
