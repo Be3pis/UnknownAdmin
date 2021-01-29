@@ -1374,7 +1374,7 @@ Unknown.AddCommand("claim", "Claims player with networkownership.", function(pla
                            local CurrentCFrame = LocalPlayer.Character.HumanoidRootPart.CFrame
                             repeat
                                
-                                Player.Character.HumanoidRootPart.CFrame = LocalPlayer.Character["Right Arm"].CFrame 
+                                Player.Character:SetPrimaryPartCFrame(Tool.Handle.CFrame) 
                                 wait()
                             until Tool.Parent == Player.Character
 
