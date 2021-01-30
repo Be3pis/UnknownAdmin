@@ -459,8 +459,11 @@ local plrs = game:GetService("Players")
 function Unknown.GetShortenedPlrFromName(name)
 	name = string.lower(tostring(name))
 
+
     if not game:GetService("Players"):FindFirstChild("random") and name == "random"then
-        return {plrs:GetChildren()[math.random(1, #plrs:GetChildren())]}	
+        local chosen = plrs:GetChildren()[math.random(1, #plrs:GetChildren())]
+        Unknown.Notify("Chosen player: "..chosen.Name)
+            return {chosen}	
     end
 
 	if not game:GetService("Players"):FindFirstChild("me") and name == "me" or game:GetService("Players"):FindFirstChild("me") and game:GetService("Players"):FindFirstChild("me").ClassName ~= "Player" and name == "me" then
