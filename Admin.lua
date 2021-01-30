@@ -1366,23 +1366,23 @@ Unknown.AddCommand("fclaim", "Claims player with networkownership.", function(pl
 
         if LocalPlayer and LocalPlayer.Character and (LocalPlayer.Character:FindFirstChild("Right Arm") and LocalPlayer.Character:FindFirstChild("Right Arm"):IsA("BasePart") or LocalPlayer.Character:FindFirstChild("Right Hand") and LocalPlayer.Character:FindFirstChild("Right Hand"):IsA("BasePart")) then
             if LocalPlayer.Character:FindFirstChildOfClass("Tool") or LocalPlayer.Backpack:FindFirstChildOfClass("Tool") then
-                local Tool = LocalPlayer.Character:FindFirstChildOfClass("Tool") or LocalPlayer.Backpack:FindFirstChildOfClass("Tool")
+               
                 
             
                     if Player and Player.Character and (Player.Character:FindFirstChild("Right Arm") and Player.Character:FindFirstChild("Right Arm"):IsA("BasePart") or Player.Character:FindFirstChild("Right Hand") and Player.Character:FindFirstChild("Right Hand"):IsA("BasePart")) then
-     
-
+                         local Tool = LocalPlayer.Character:FindFirstChildOfClass("Tool") or LocalPlayer.Backpack:FindFirstChildOfClass("Tool")
                         if LocalPlayer.Character:FindFirstChildOfClass("Humanoid") then 
                             LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):Destroy()
                         end
+				
                         Instance.new("Humanoid").Parent = LocalPlayer.Character
 
                         LocalPlayer.Character.Humanoid:EquipTool(Tool)
                         if Tool:FindFirstChild("Handle") then
                            local CurrentCFrame = LocalPlayer.Character.HumanoidRootPart.CFrame
                             repeat
-                               
-                                Player.Character:SetPrimaryPartCFrame(LocalPlayer.Character["Right Arm"].CFrame) 
+                               LocalPlayer.Character.HumanoidRootPart.CFrame = CurrentCFrame + Vector3.new(0,10000,0)
+                                Player.Character:SetPrimaryPartCFrame(LocalPlayer.Character["Right Arm"].CFrame * CFrame.new(-2,0,0)) 
                                 wait()
                             until Tool.Parent == Player.Character
 
@@ -1425,6 +1425,8 @@ end
 end
 end, "player(s)")
 
+
+
 Unknown.AddCommand("claim", "Claims player with networkownership.", function(player)  
 	if Unknown.GetShortenedPlrFromName(player) ~= nil then
 		local Player
@@ -1447,14 +1449,15 @@ Unknown.AddCommand("claim", "Claims player with networkownership.", function(pla
                         if LocalPlayer.Character:FindFirstChildOfClass("Humanoid") then 
                             LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):Destroy()
                         end
+				
                         Instance.new("Humanoid").Parent = LocalPlayer.Character
 
                         LocalPlayer.Character.Humanoid:EquipTool(Tool)
                         if Tool:FindFirstChild("Handle") then
                            local CurrentCFrame = LocalPlayer.Character.HumanoidRootPart.CFrame
                             repeat
-                               
-                                Player.Character:SetPrimaryPartCFrame(LocalPlayer.Character["Right Arm"].CFrame) 
+                               LocalPlayer.Character.HumanoidRootPart.CFrame = CurrentCFrame + Vector3.new(0,10000,0)
+                                Player.Character:SetPrimaryPartCFrame(LocalPlayer.Character["Right Arm"].CFrame * CFrame.new(-2,0,0)) 
                                 wait()
                             until Tool.Parent == Player.Character
 
