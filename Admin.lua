@@ -14,6 +14,7 @@ local LocalPlayer = game:GetService("Players").LocalPlayer
 local CoreGui = game:GetService("CoreGui")
 local Character = LocalPlayer.Character
 local name = LocalPlayer.Name
+local plrs = game:GetService("Players")
 _G.Loopbring = false
 _G.Hold = false
 _G.Bang = false
@@ -454,9 +455,13 @@ function Unknown.UpdateCmdList(cmdguiobject, cmdlistsettings)
 
 	end
 end
-
+local plrs = game:GetService("Players")
 function Unknown.GetShortenedPlrFromName(name)
 	name = string.lower(tostring(name))
+
+    if not game:GetService("Players"):FindFirstChild("random") and name == "random"then
+        return {plrs:GetChildren()[math.random(1, #plrs:GetChildren())]}	
+    end
 
 	if not game:GetService("Players"):FindFirstChild("me") and name == "me" or game:GetService("Players"):FindFirstChild("me") and game:GetService("Players"):FindFirstChild("me").ClassName ~= "Player" and name == "me" then
 		return {LocalPlayer}
