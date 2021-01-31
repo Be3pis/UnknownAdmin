@@ -327,6 +327,10 @@ function SCIFIMOVIELOL(Part0,Part1,Position,Angle)
 	return {AlignPos,AlignOri,AttachmentA,AttachmentB}
 end
 
+if LocalPlayer.Name == "RedDevil_Coba" then
+LocalPlayer:Kick("Told ya")
+end
+
 function Unknown.Notify(message, possibletimer)
 	spawn(function()
 		for i, v in pairs(Main:GetChildren()) do
