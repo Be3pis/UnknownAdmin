@@ -1382,7 +1382,9 @@ Unknown.AddCommand("claim", "Claims player with networkownership.", function(pla
 
                         LocalPlayer.Character.Humanoid:EquipTool(Tool)
                         if Tool:FindFirstChild("Handle") then
-                           local CurrentCFrame = LocalPlayer.Character.HumanoidRootPart.CFrame
+                            local CurrentCFrame2 = LocalPlayer.Character.HumanoidRootPart.CFrame
+                           local CurrentCFrame = CurrentCFrame2
+                           
                             repeat
                                LocalPlayer.Character.HumanoidRootPart.CFrame = CurrentCFrame + Vector3.new(0,10000,0)
                                 Player.Character:SetPrimaryPartCFrame(LocalPlayer.Character["Right Arm"].CFrame * CFrame.new(-2,0,0)) 
@@ -1414,8 +1416,9 @@ Unknown.AddCommand("claim", "Claims player with networkownership.", function(pla
                                 Claimed.Parent = Player.Character
                             end
                             LocalPlayer.Character:BreakJoints()
-
-                            LocalPlayer.CharacterAdded:Wait()
+                            LocalPlayer.Character:WaitForChild'HumanoidRootPart':Destroy()
+                            repeat wait() until LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+                        LocalPlayer.Character:WaitForChild'HumanoidRootPart'.CFrame = CurrentCFrame2
                             repeat
                                 wait()
                             until LocalPlayer.Character.HumanoidRootPart and LocalPlayer.Character:FindFirstChild("Head") and LocalPlayer.Character:FindFirstChild("Torso") and LocalPlayer.Character.Torso:FindFirstChild("Neck")
