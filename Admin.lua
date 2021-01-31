@@ -1359,77 +1359,6 @@ Unknown.AddCommand("control", "controls player using claim", function(player)
 	end
 end, "player(s)")
 
-Unknown.AddCommand("fclaim", "Claims player with networkownership.", function(player)  
-	if Unknown.GetShortenedPlrFromName(player) ~= nil then
-		local Player
-		for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
-			Player = v 
-  
-        
-
-        if LocalPlayer and LocalPlayer.Character and (LocalPlayer.Character:FindFirstChild("Right Arm") and LocalPlayer.Character:FindFirstChild("Right Arm"):IsA("BasePart") or LocalPlayer.Character:FindFirstChild("Right Hand") and LocalPlayer.Character:FindFirstChild("Right Hand"):IsA("BasePart")) then
-            if LocalPlayer.Character:FindFirstChildOfClass("Tool") or LocalPlayer.Backpack:FindFirstChildOfClass("Tool") then
-               
-                
-            
-                    if Player and Player.Character and (Player.Character:FindFirstChild("Right Arm") and Player.Character:FindFirstChild("Right Arm"):IsA("BasePart") or Player.Character:FindFirstChild("Right Hand") and Player.Character:FindFirstChild("Right Hand"):IsA("BasePart")) then
-                         local Tool = LocalPlayer.Character:FindFirstChildOfClass("Tool") or LocalPlayer.Backpack:FindFirstChildOfClass("Tool")
-                        if LocalPlayer.Character:FindFirstChildOfClass("Humanoid") then 
-                            LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):Destroy()
-                        end
-				
-                        Instance.new("Humanoid").Parent = LocalPlayer.Character
-
-                        LocalPlayer.Character.Humanoid:EquipTool(Tool)
-                        if Tool:FindFirstChild("Handle") then
-                           local CurrentCFrame = LocalPlayer.Character.HumanoidRootPart.CFrame
-                            repeat
-                               LocalPlayer.Character.HumanoidRootPart.CFrame = CurrentCFrame + Vector3.new(0,10000,0)
-                                Player.Character:SetPrimaryPartCFrame(LocalPlayer.Character["Right Arm"].CFrame * CFrame.new(-2,0,0)) 
-                                wait()
-                            until Tool.Parent == Player.Character
-
-                            workspace.FallenPartsDestroyHeight = 0/1/0
-                           
-
-                   
-
-            	 for i = 1, 10 do		
-						 LocalPlayer.Character.HumanoidRootPart.CFrame = (CurrentCFrame + Vector3.new(0,math.huge,0))
-						end
-						wait(.1)
-				
-
-								
-                            for i = 1, 10 do
-                                LocalPlayer.Character:WaitForChild'HumanoidRootPart'.CFrame = CurrentCFrame
-                            end
-					
-									
-                            wait(.2)
-                            
-                            if not Player.Character:FindFirstChild("-Claimed") then
-                                local Claimed = Instance.new("ObjectValue")
-                                Claimed.Name = "-Claimed"
-                                Claimed.Parent = Player.Character
-                            end
-                            LocalPlayer.Character:BreakJoints()
-
-                            LocalPlayer.CharacterAdded:Wait()
-                            repeat
-                                wait()
-                            until LocalPlayer.Character.HumanoidRootPart and LocalPlayer.Character:FindFirstChild("Head") and LocalPlayer.Character:FindFirstChild("Torso") and LocalPlayer.Character.Torso:FindFirstChild("Neck")
-             
-end
-end
-end
-end
-end
-end
-end, "player(s)")
-
-
-
 Unknown.AddCommand("claim", "Claims player with networkownership.", function(player)  
 	if Unknown.GetShortenedPlrFromName(player) ~= nil then
 		local Player
@@ -1444,10 +1373,6 @@ Unknown.AddCommand("claim", "Claims player with networkownership.", function(pla
                 
             
                     if Player and Player.Character and (Player.Character:FindFirstChild("Right Arm") and Player.Character:FindFirstChild("Right Arm"):IsA("BasePart") or Player.Character:FindFirstChild("Right Hand") and Player.Character:FindFirstChild("Right Hand"):IsA("BasePart")) then
-     				pos = LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame
-								for i,v in pairs(LocalPlayer.Character:GetChildren()) do v:Destroy() end
-				repeat wait() until LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-				LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame = pos
                          local Tool = LocalPlayer.Character:FindFirstChildOfClass("Tool") or LocalPlayer.Backpack:FindFirstChildOfClass("Tool")
                         if LocalPlayer.Character:FindFirstChildOfClass("Humanoid") then 
                             LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):Destroy()
@@ -1502,6 +1427,10 @@ end
 end
 end
 end, "player(s)")
+
+
+
+
 
 
 Unknown.AddCommand("Blockhats/bhats", "block", function()
