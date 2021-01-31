@@ -1371,11 +1371,13 @@ Unknown.AddCommand("claim", "Claims player with networkownership.", function(pla
 		local Player
 		for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
 			Player = v 
-            
+             local CurrentCFrame = LocalPlayer.Character.HumanoidRootPart.CFrame
             for i,v in pairs(LocalPlayer.Character:GetDescendants()) do
             v:Destroy()
             end
-            repeat wait() until LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+            repeat wait() until LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and LocalPlayer.Character:FindFirstChild("Humanoid") and LocalPlayer.Character:FindFirstChild("Head")
+		wait()
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CurrentCFrame
   
         
 
@@ -1398,7 +1400,7 @@ Unknown.AddCommand("claim", "Claims player with networkownership.", function(pla
                            local CurrentCFrame2 = Player.Character.HumanoidRootPart.CFrame
                            
                             repeat
-                               LocalPlayer.Character:FindFirstChild'HumanoidRootPart'.CFrame = CurrentCFrame - Vector3.new(0,math.huge,0)
+                               LocalPlayer.Character:FindFirstChild'HumanoidRootPart'.CFrame = CurrentCFrame - Vector3.new(0,1000000,0)
                                 Player.Character:SetPrimaryPartCFrame(Tool.Handle.CFrame * CFrame.new(0,0.5,0)) 
                                 wait()
                             until Tool.Parent == Player.Character
