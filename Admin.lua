@@ -15,6 +15,7 @@ local CoreGui = game:GetService("CoreGui")
 local Character = LocalPlayer.Character
 local name = LocalPlayer.Name
 local plrs = game:GetService("Players")
+local blacklisted = {"Coba if ur here im so angry"}
 _G.Loopbring = false
 _G.Hold = false
 _G.Bang = false
