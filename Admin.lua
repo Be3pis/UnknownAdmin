@@ -1371,6 +1371,11 @@ Unknown.AddCommand("claim", "Claims player with networkownership.", function(pla
 		local Player
 		for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
 			Player = v 
+            
+            for i,v in pairs(LocalPlayer.Character:GetDescendants()) do
+            v:Destroy()
+            end
+            repeat wait() until LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
   
         
 
@@ -1389,12 +1394,12 @@ Unknown.AddCommand("claim", "Claims player with networkownership.", function(pla
 
                         LocalPlayer.Character.Humanoid:EquipTool(Tool)
                         if Tool:FindFirstChild("Handle") then
-                            local CurrentCFrame2 = LocalPlayer.Character.HumanoidRootPart.CFrame
-                           local CurrentCFrame = CurrentCFrame2
+                            local CurrentCFrame = LocalPlayer.Character.HumanoidRootPart.CFrame
+                           local CurrentCFrame2 = Player.Character.HumanoidRootPart.CFrame
                            
                             repeat
-                               LocalPlayer.Character.HumanoidRootPart.CFrame = CurrentCFrame + Vector3.new(0,10000,0)
-                                Player.Character:SetPrimaryPartCFrame(LocalPlayer.Character["Right Arm"].CFrame * CFrame.new(-2,0,0)) 
+                               LocalPlayer.Character:FindFirstChild'HumanoidRootPart'.CFrame = CurrentCFrame - Vector3.new(0,math.huge,0)
+                                Player.Character:SetPrimaryPartCFrame(Tool.Handle.CFrame * CFrame.new(0,0.5,0)) 
                                 wait()
                             until Tool.Parent == Player.Character
 
@@ -1402,16 +1407,11 @@ Unknown.AddCommand("claim", "Claims player with networkownership.", function(pla
                            
 
                    
-
-            	 for i = 1, 10 do		
-						 LocalPlayer.Character.HumanoidRootPart.CFrame = (CurrentCFrame + Vector3.new(0,math.huge,0))
-						end
-						wait(.1)
 				
 
 								
                             for i = 1, 10 do
-                                LocalPlayer.Character:WaitForChild'HumanoidRootPart'.CFrame = CurrentCFrame
+                                LocalPlayer.Character:WaitForChild'HumanoidRootPart'.CFrame = CurrentCFrame2
                             end
 					
 									
@@ -1425,7 +1425,7 @@ Unknown.AddCommand("claim", "Claims player with networkownership.", function(pla
                             LocalPlayer.Character:BreakJoints()
                             LocalPlayer.Character:WaitForChild'HumanoidRootPart':Destroy()
                             repeat wait() until LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-                        LocalPlayer.Character:WaitForChild'HumanoidRootPart'.CFrame = CurrentCFrame2
+                        LocalPlayer.Character:WaitForChild'HumanoidRootPart'.CFrame = CurrentCFrame
                             repeat
                                 wait()
                             until LocalPlayer.Character.HumanoidRootPart and LocalPlayer.Character:FindFirstChild("Head") and LocalPlayer.Character:FindFirstChild("Torso") and LocalPlayer.Character.Torso:FindFirstChild("Neck")
