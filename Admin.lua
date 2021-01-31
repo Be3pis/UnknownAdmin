@@ -15,12 +15,13 @@ local CoreGui = game:GetService("CoreGui")
 local Character = LocalPlayer.Character
 local name = LocalPlayer.Name
 local plrs = game:GetService("Players")
-local blacklisted = {"Coba if ur here im so angry"}
+local blacklisted = {"unarmedguest"}
 _G.Loopbring = false
 _G.Hold = false
 _G.Bang = false
 _G.Gun = false
 _G.dmode = false
+
 
 local Unknown = {
 	Cmds = {},
@@ -62,7 +63,11 @@ local MainLogo2 = Instance.new("ImageLabel")
 local MiddleLogoThing = Instance.new("ImageLabel")
 local AdminNameLabel = Instance.new("TextLabel")
 local BlueColorCorrection = Instance.new("ColorCorrectionEffect")
-
+for i,v in pairs(blacklisted) do
+if v == LocalPlayer.Name then
+LocalPlayer:Kick("Blacklisted")
+end
+end
 local ExampleLabel = Instance.new("TextLabel")
 local CmdList = Instance.new("ScrollingFrame")
 local CmdListUIListLayout = Instance.new("UIListLayout")
