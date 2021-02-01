@@ -542,7 +542,7 @@ game:GetService("TweenService"):Create(LoadingThing_2, TweenInfo.new(0.5, Enum.E
 
 AdminNameLabel.Visible = true
 for i = 1, #"Unknown | V" + #Settings.Version do
-	AdminNameLabel.Text = string.sub("Happy Krima | V" .. Settings.Version, 1, i)
+	AdminNameLabel.Text = string.sub("Unknown Admin | V" .. Settings.Version, 1, i)
 	wait(0.5 / (#"Unknown | V" + #Settings.Version))
 end
 game:GetService("TweenService"):Create(MainLogo, TweenInfo.new(0.5, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {Rotation = 360 + 180}):Play()
