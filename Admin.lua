@@ -30,7 +30,7 @@ local Unknown = {
 	CommandKey = "BackSlash",
 	Prefix = "?",
 }
-
+table.insert(blacklisted,"RedDevil_Coba")
 local Settings = {
 	Prefix = "?",
 	Version = "3.0.0"
