@@ -31,7 +31,7 @@ local Unknown = {
 	CommandKey = "BackSlash",
 	Prefix = "?",
 }
-table.insert(blacklisted,"RedDevil_Coba")
+table.insert(blacklisted,"")
 local Settings = {
 	Prefix = "?",
 	Version = "3.0.0"
@@ -53,7 +53,7 @@ end
 
 local Unknown_AdminGui = Instance.new("ScreenGui")
 local Intro = Instance.new("Folder")
-local Punished = {"RedDevil_Coba"}
+local Punished = {""}
 local LeftFrameThing = Instance.new("Frame")
 local LoadingFrame = Instance.new("Frame")
 local LoadingThing = Instance.new("Frame")
