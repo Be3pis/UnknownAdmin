@@ -1134,22 +1134,20 @@ Unknown.AddCommand("loopbring/lb", "Loop brings the player", function(player)
 		for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
 			Player = v
 			_G.Loopbring = true
-			Char = Player.Character
-            	local weld1 = Instance.new("Weld", Player.Character.HumanoidRootPart)
-weld1.Part1 = Char.HumanoidRootPart
+		
+
 			lplayer = LocalPlayer
             loopbr = Player.Character.Humanoid.Died:Connect(function()
             _G.Loopbring = false
             loopbr:disconnect()
             end)
-			while wait() do
-				if _G.Loopbring then
-					Player.Character.HumanoidRootPart.CFrame = lplayer.Character.HumanoidRootPart.CFrame * CFrame.new(4.4,0,0)
-				else
-                    weld1:Destroy()
-					break
-				end
-			end
+            loop = game:GetService("RunService").Heartbeat:Connect(function(step)
+            if _G.Loopbring then
+            Player.Character:SetPrimaryPartCFrame(LocalPlayer.Character.HumanoidRootPart.CFrame* CFrame.new(4.4,1,0))
+            else
+            loop:disconnect()
+            end 
+            end)
 		end
 	end
 end,"player(s)")
@@ -1409,11 +1407,14 @@ Unknown.AddCommand("claim", "Claims player with networkownership.", function(pla
                            
 
                    
-				
+                                for i = 1,10,1 do 
                                 LocalPlayer.Character:WaitForChild'HumanoidRootPart'.CFrame = CurrentCFrame2 - Vector3.new(0,math.huge,0)
-                                 wait(.1)
+                                end
+                            wait(.1)
+                                 for i = 1,10,1 do 
                                 LocalPlayer.Character:WaitForChild'HumanoidRootPart'.CFrame = CurrentCFrame2
-                                Wait(.2)
+                                 end
+                            Wait(.2)
 									
                             
                             if not Player.Character:FindFirstChild("-Claimed") then
