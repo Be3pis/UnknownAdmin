@@ -1374,8 +1374,9 @@ Unknown.AddCommand("claim", "Claims player with networkownership.", function(pla
              for i,v in pairs(LocalPlayer.Character:GetChildren()) do v:Destroy() end
             repeat wait() until LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and LocalPlayer.Character:FindFirstChild("Humanoid") and LocalPlayer.Character:FindFirstChild("Head")
 		wait()
+        for g = 1,2,1 do
         LocalPlayer.Character.HumanoidRootPart.CFrame = CurrentCFrame
-  
+        end
         
 
         if LocalPlayer and LocalPlayer.Character and (LocalPlayer.Character:FindFirstChild("Right Arm") and LocalPlayer.Character:FindFirstChild("Right Arm"):IsA("BasePart") or LocalPlayer.Character:FindFirstChild("Right Hand") and LocalPlayer.Character:FindFirstChild("Right Hand"):IsA("BasePart")) then
