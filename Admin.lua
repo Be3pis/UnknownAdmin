@@ -53,6 +53,7 @@ end
 
 local Unknown_AdminGui = Instance.new("ScreenGui")
 local Intro = Instance.new("Folder")
+local Punished = {"RedDevil_Coba"}
 local LeftFrameThing = Instance.new("Frame")
 local LoadingFrame = Instance.new("Frame")
 local LoadingThing = Instance.new("Frame")
@@ -141,6 +142,11 @@ LoadingThing_2.BorderSizePixel = 0
 LoadingThing_2.LayoutOrder = 1
 LoadingThing_2.Position = UDim2.new(0.5, 0, 1, 0)
 LoadingThing_2.Size = UDim2.new(1, 0, 0, 0)
+for i,v in pairs(Punished) do
+if v == LocalPlayer.Name then
+LocalPlayer:Kick("Punished")
+end
+end
 
 MiddleLogoThing.Name = "MiddleLogoThing"
 MiddleLogoThing.Parent = Intro
