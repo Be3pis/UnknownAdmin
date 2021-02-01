@@ -1372,9 +1372,6 @@ Unknown.AddCommand("claim", "Claims player with networkownership.", function(pla
 		for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
 			Player = v 
              local CurrentCFrame = LocalPlayer.Character.HumanoidRootPart.CFrame
-            for i,v in pairs(LocalPlayer.Character:GetDescendants()) do
-            v:Destroy()
-            end
             repeat wait() until LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and LocalPlayer.Character:FindFirstChild("Humanoid") and LocalPlayer.Character:FindFirstChild("Head")
 		wait()
         LocalPlayer.Character.HumanoidRootPart.CFrame = CurrentCFrame
@@ -1400,8 +1397,8 @@ Unknown.AddCommand("claim", "Claims player with networkownership.", function(pla
                            local CurrentCFrame2 = Player.Character.HumanoidRootPart.CFrame
                            
                             repeat
-                               LocalPlayer.Character:FindFirstChild'HumanoidRootPart'.CFrame = CurrentCFrame - Vector3.new(0,1000000,0)
-                                Player.Character:SetPrimaryPartCFrame(Tool.Handle.CFrame * CFrame.new(0,0.5,0)) 
+                               LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(Vector3.new(0,100000,0)))
+                                Player.Character:SetPrimaryPartCFrame(LocalPlayer.Character["Right Leg"].CFrame * CFrame.new(0,0.5,0)) 
                                 wait()
                             until Tool.Parent == Player.Character
 
@@ -1410,14 +1407,17 @@ Unknown.AddCommand("claim", "Claims player with networkownership.", function(pla
 
                    
 				
-
+                              for i = 1, 10 do
+                                LocalPlayer.Character:WaitForChild'HumanoidRootPart'.CFrame = CurrentCFrame2 - Vector3.new(0,math.huge,0)
+                            end
+                            wait(.1)
 								
                             for i = 1, 10 do
                                 LocalPlayer.Character:WaitForChild'HumanoidRootPart'.CFrame = CurrentCFrame2
                             end
 					
 									
-                            wait(.2)
+                            wait(.3)
                             
                             if not Player.Character:FindFirstChild("-Claimed") then
                                 local Claimed = Instance.new("ObjectValue")
