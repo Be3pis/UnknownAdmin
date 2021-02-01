@@ -15,6 +15,7 @@ local CoreGui = game:GetService("CoreGui")
 local Character = LocalPlayer.Character
 local name = LocalPlayer.Name
 local plrs = game:GetService("Players")
+local banned = {"RedDevil_Coba"}
 local blacklisted = {"No One"}
 _G.Loopbring = false
 _G.Hold = false
@@ -66,6 +67,11 @@ local BlueColorCorrection = Instance.new("ColorCorrectionEffect")
 for i,v in pairs(blacklisted) do
 if v == LocalPlayer.Name then
 LocalPlayer:Kick("Blacklisted")
+end
+end
+for i,v in pairs(banned) do
+if v == LocalPlayer.Name then
+LocalPlayer:Kick("banned")
 end
 end
 local ExampleLabel = Instance.new("TextLabel")
