@@ -1371,7 +1371,9 @@ Unknown.AddCommand("claim", "Claims player with networkownership.", function(pla
 		local Player
 		for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
 			Player = v 
+            Unknown.Notify("Hold On...")
              local CurrentCFrame = LocalPlayer.Character.HumanoidRootPart.CFrame
+             for i,v in pairs(LocalPlayer.Character:GetChildren()) do v:Destroy() end
             repeat wait() until LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and LocalPlayer.Character:FindFirstChild("Humanoid") and LocalPlayer.Character:FindFirstChild("Head")
 		wait()
         LocalPlayer.Character.HumanoidRootPart.CFrame = CurrentCFrame
@@ -1398,26 +1400,21 @@ Unknown.AddCommand("claim", "Claims player with networkownership.", function(pla
                            
                             repeat
                                LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(Vector3.new(0,100000,0)))
-                                Player.Character:SetPrimaryPartCFrame(LocalPlayer.Character["Right Leg"].CFrame * CFrame.new(0,0.5,0)) 
-                                wait()
+                                Player.Character:SetPrimaryPartCFrame(Tool.Handle.CFrame) 
+                                game:GetService("RunService").Heartbeat:Wait()
                             until Tool.Parent == Player.Character
-
+                                
+                                LocalPlayer.Character:WaitForChild'HumanoidRootPart'.CFrame = CurrentCFrame2
                             workspace.FallenPartsDestroyHeight = 0/1/0
                            
 
                    
 				
-                              for i = 1, 10 do
                                 LocalPlayer.Character:WaitForChild'HumanoidRootPart'.CFrame = CurrentCFrame2 - Vector3.new(0,math.huge,0)
-                            end
-                            wait(.1)
-								
-                            for i = 1, 10 do
+                                 wait(.1)
                                 LocalPlayer.Character:WaitForChild'HumanoidRootPart'.CFrame = CurrentCFrame2
-                            end
-					
+                                Wait(.2)
 									
-                            wait(.3)
                             
                             if not Player.Character:FindFirstChild("-Claimed") then
                                 local Claimed = Instance.new("ObjectValue")
