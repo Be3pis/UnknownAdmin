@@ -2098,7 +2098,7 @@ end
 	end
 end,"player(s)")
 
-Unknown.AddCommand("Ungrabgun", "resets gun", function()
+Unknown.AddCommand("Ungun", "resets gun", function()
 _G.Gun = false
 end)
 
