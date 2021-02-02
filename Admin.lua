@@ -1391,27 +1391,31 @@ Unknown.AddCommand("claim", "Claims player with networkownership.", function(pla
         end
         
 
-        if LocalPlayer and LocalPlayer.Character and (LocalPlayer.Character:FindFirstChild("Right Arm") and LocalPlayer.Character:FindFirstChild("Right Arm"):IsA("BasePart") or LocalPlayer.Character:FindFirstChild("Right Hand") and LocalPlayer.Character:FindFirstChild("Right Hand"):IsA("BasePart")) then
+        if true then
             if LocalPlayer.Character:FindFirstChildOfClass("Tool") or LocalPlayer.Backpack:FindFirstChildOfClass("Tool") then
-               
+               print("got past")
                 
             
-                    if Player and Player.Character and (Player.Character:FindFirstChild("Right Arm") and Player.Character:FindFirstChild("Right Arm"):IsA("BasePart") or Player.Character:FindFirstChild("Right Hand") and Player.Character:FindFirstChild("Right Hand"):IsA("BasePart")) then
+                    if true then
                          local Tool = LocalPlayer.Character:FindFirstChildOfClass("Tool") or LocalPlayer.Backpack:FindFirstChildOfClass("Tool")
-                        if LocalPlayer.Character:FindFirstChildOfClass("Humanoid") then 
-                            LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):Destroy()
-                        end
-				
-                        Instance.new("Humanoid").Parent = LocalPlayer.Character
 
-                        LocalPlayer.Character.Humanoid:EquipTool(Tool)
+                        a = LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+                        LocalPlayer.Character:FindFirstChildOfClass("Humanoid").Name = "1"
+                        local newHum = LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):Clone()
+                        newHum.Parent = LocalPlayer.Character
+                        newHum.Name = "Humanoid"
+                        wait()
+                                                if a then 
+                            a:Destroy()
+                        end
+                        Tool.Parent = LocalPlayer.Character
                         if Tool:FindFirstChild("Handle") then
                             local CurrentCFrame = LocalPlayer.Character.HumanoidRootPart.CFrame
                            local CurrentCFrame2 = Player.Character.HumanoidRootPart.CFrame
-                           
+                           LocalPlayer.Character.PrimaryPart = LocalPlayer.Character.HumanoidRootPart
                             repeat
-                               LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(Vector3.new(0,1000000,0)))
-                                Player.Character:SetPrimaryPartCFrame(Tool.Handle.CFrame) 
+                               Player.Character.HumanoidRootPart.CFrame = (CFrame.new(Vector3.new(0,1000000,0)))
+                                LocalPlayer.Character.HumanoidRootPart.CFrame = (Player.Character.HumanoidRootPart.CFrame) 
                                 game:GetService("RunService").Heartbeat:Wait()
                             until Tool.Parent == Player.Character
                                 
