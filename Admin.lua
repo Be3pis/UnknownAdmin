@@ -18,6 +18,7 @@ local plrs = game:GetService("Players")
 local banned = {"a"}
 local blacklisted = {"No One"}
 _G.Loopbring = false
+_G.Looptp = false
 _G.Hold = false
 _G.Bang = false
 _G.Gun = false
@@ -1163,6 +1164,40 @@ end,"player(s)")
 
 Unknown.AddCommand("unloopbring/unlb", "stops loobringing all players the player", function()
 	_G.Loopbring = false
+end)
+
+Unknown.AddCommand("looptp/lt", "Loop brings the player", function(player,player2)
+	if Unknown.GetShortenedPlrFromName(player) ~= nil then
+		local Player
+		for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
+			Player = v
+				if Unknown.GetShortenedPlrFromName(player2) ~= nil then
+		local Player2
+		for i, c in pairs(Unknown.GetShortenedPlrFromName(player2)) do
+			Player2 = c
+			_G.Looptp = true
+		
+
+			lplayer = LocalPlayer
+            loopbr = Player.Character.Humanoid.Died:Connect(function()
+            _G.Loopbring = false
+            loopbr:disconnect()
+            end)
+            loop = game:GetService("RunService").Heartbeat:Connect(function(step)
+            if _G.Loopbring then
+            Player.Character:SetPrimaryPartCFrame(Player2.Character.HumanoidRootPart.CFrame* CFrame.new(4.4,1,0))
+            else
+            loop:disconnect()
+            end 
+            end)
+		end
+		end
+		end
+	end
+end,"player(s)")
+
+Unknown.AddCommand("unlooptp/unlt", "stops loobringing all players the player", function()
+	_G.Looptp = false
 end)
 
 Unknown.AddCommand("jumppower/jp", "Sets jumppower of player, ONLY REPLICATES on other players IF player is/players are claimed with claim command (localplayer doesn't need to be claimed).", function(player, power)   
