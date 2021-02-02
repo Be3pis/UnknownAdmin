@@ -553,10 +553,7 @@ game:GetService("TweenService"):Create(LoadingThing, TweenInfo.new(0.5, Enum.Eas
 game:GetService("TweenService"):Create(LoadingThing_2, TweenInfo.new(0.5, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {Size = UDim2.new(1, 0, 1, 0)}):Play()
 
 AdminNameLabel.Visible = true
-for i = 1, #"Unknown | V" + #Settings.Version do
-	AdminNameLabel.Text = string.sub("Unknown Admin | V" .. Settings.Version, 1, i)
-	wait(0.5 / (#"Unknown | V" + #Settings.Version))
-end
+	AdminNameLabel.Text = ("Unknown Admin | "..Settings.Version)
 game:GetService("TweenService"):Create(MainLogo, TweenInfo.new(0.5, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {Rotation = 360 + 180}):Play()
 wait(0.5)
 game:GetService("TweenService"):Create(MainLogo, TweenInfo.new(0.5, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), {Rotation = 360 * 2 + 180}):Play()
