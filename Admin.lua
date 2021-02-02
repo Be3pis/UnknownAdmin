@@ -1410,15 +1410,17 @@ Unknown.AddCommand("claim", "Claims player with networkownership.", function(pla
                            local CurrentCFrame2 = Player.Character.HumanoidRootPart.CFrame
                            
                             repeat
-                               LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(Vector3.new(0,math.huge,0)))
+                               LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(Vector3.new(0,1000000,0)))
                                 Player.Character:SetPrimaryPartCFrame(Tool.Handle.CFrame) 
                                 game:GetService("RunService").Heartbeat:Wait()
                             until Tool.Parent == Player.Character
                                 
                                 LocalPlayer.Character:WaitForChild'HumanoidRootPart'.CFrame = CurrentCFrame2
                             workspace.FallenPartsDestroyHeight = 0/1/0
-                           
-
+                                                                                for i = 1,5  do
+                                                               LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(Vector3.new(0,math.huge,0)))
+                            end    
+                            wait(.1)
                                 for i = 1,5  do
                                 LocalPlayer.Character:WaitForChild'HumanoidRootPart'.CFrame = CurrentCFrame2
                                 end
@@ -1663,10 +1665,14 @@ Unknown.AddCommand("unbang", "bruh", function()
 	_G.Bang = false
 end)
 
-Unknown.AddCommand("GrabKnife", "Loads FE grab knife remake", function()
-	local KnifeAccessory
+Unknown.AddCommand("Grab", "Loads FE grab knife remake", function(player)
+	if Unknown.GetShortenedPlrFromName(player) ~= nil then
+		local Player
+		for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
+            Player = v
+            local KnifeAccessory
 
-	if LocalPlayer:FindFirstChild("-Running") then
+	if LocalPlayer.Character:FindFirstChild("-Running") then
 		return Unknown.Notify("Command: " .. LocalPlayer["-Running"].Value .. " is already running.", {7, 1, 1})
 	elseif not LocalPlayer.Character:FindFirstChildOfClass("Accessory") then
 		return Unknown.Notify("You need at least 1 hat or preferably accessory: https://www.roblox.com/catalog/4684948729/Kawaii-Knife", {7, 1, 1})
@@ -1679,7 +1685,7 @@ Unknown.AddCommand("GrabKnife", "Loads FE grab knife remake", function()
 		end
 
 		local Running = Instance.new("StringValue")
-		Running.Parent = LocalPlayer
+		Running.Parent = LocalPlayer.Character
 		Running.Name = "-Running"
 		Running.Value = "Grab Knife"
 
@@ -1795,25 +1801,7 @@ Unknown.AddCommand("GrabKnife", "Loads FE grab knife remake", function()
 		Rot.Parent = Knife
 		Rot.RigidityEnabled = true
 		Rot.Attachment0, Rot.Attachment1 = Attach0, Attach1
-
-
-		Stuff.Events.ModeChangeEvent = game:GetService("UserInputService").InputBegan:Connect(function(Key)
-			if Key.KeyCode == Enum.KeyCode.Q then
-				Stuff.Mode = 1
-			elseif Key.KeyCode == Enum.KeyCode.E then
-				Stuff.Mode = 2
-			elseif Key.KeyCode == Enum.KeyCode.R then
-				Stuff.Mode = 3
-			elseif Key.KeyCode == Enum.KeyCode.T then
-				Stuff.Mode = 4
-			end
-		end)
-
-		Stuff.Events.Button1DownEvent = LocalPlayer:GetMouse().Button1Down:Connect(function()
-			if Stuff.Debounces.Button1DownDebounce == false and Stuff.PlrHeld == nil and Stuff.Mode ~= 4 then
-
-				Stuff.Debounces.Button1DownDebounce = true
-
+        
 				LA = Instance.new("Weld")
 				LA.Name = "GrabKnifeLA"
 				LA.Parent = LocalPlayer.Character
@@ -1829,580 +1817,50 @@ Unknown.AddCommand("GrabKnife", "Loads FE grab knife remake", function()
 				RA.Part1 = RightArm
 				RA.C0 = CFrame.new(Vector3.new(1, 1, 0)) * CFrame.Angles(math.rad(10), math.rad(-10), math.rad(10))
 				RA.C1 = CFrame.new(Vector3.new(-0.5, 1, 0)) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
-
-				wait(0.1)
-				game:GetService("TweenService"):Create(LA, TweenInfo.new(0.25, Enum.EasingStyle.Circular, Enum.EasingDirection.Out), { C0 = CFrame.new(Vector3.new(-1, 0.75, 0)) * CFrame.Angles(math.rad(80), math.rad(-90), math.rad(-10)) }):Play()
+                				game:GetService("TweenService"):Create(LA, TweenInfo.new(0.25, Enum.EasingStyle.Circular, Enum.EasingDirection.Out), { C0 = CFrame.new(Vector3.new(-1, 0.75, 0)) * CFrame.Angles(math.rad(80), math.rad(-90), math.rad(-10)) }):Play()
 				game:GetService("TweenService"):Create(RA, TweenInfo.new(0.25, Enum.EasingStyle.Circular, Enum.EasingDirection.Out), { C0 = CFrame.new(Vector3.new(1, 0.75, 0)) * CFrame.Angles(math.rad(70), math.rad(40), math.rad(10)) }):Play()
-
-				local PossiblePlr
-				for i = 1, 20 do
-					if Stuff.PlrHeld == nil then
-						PossiblePlr = game.Workspace:FindPartOnRay(Ray.new(LocalPlayer.Character.HumanoidRootPart.Position, LocalPlayer.Character.HumanoidRootPart.CFrame.LookVector * 2))
-						if PossiblePlr ~= nil and game.Players:GetPlayerFromCharacter(PossiblePlr.Parent) and game.Players:GetPlayerFromCharacter(PossiblePlr.Parent).Character and game.Players:GetPlayerFromCharacter(PossiblePlr.Parent).Character:FindFirstChild("-Claimed") then
-							Stuff.PlrHeld = game.Players:GetPlayerFromCharacter(PossiblePlr.Parent)
-							break
-						end
-						wait(0.0375)
-					end
-				end
-				LA:Destroy()
-				RA:Destroy()
-				LA = nil
-				RA = nil
-				Stuff.Debounces.Button1DownDebounce = false
-
-			elseif Stuff.Mode ~= 4 and Stuff.PlrHeld ~= nil and Stuff.PlrHeld.ClassName == "Player" and Stuff.PlrHeld.Character and Stuff.PlrHeld.Character.PrimaryPart and Stuff.PlrHeld.Character:FindFirstChildOfClass("Humanoid") and Stuff.PlrHeld.Character:FindFirstChildOfClass("Humanoid").Health > 0 then
-
-				if Stuff.Mode == 1 then -- kill
-					game:GetService("TweenService"):Create(LA, TweenInfo.new(0.25, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), { C0 = CFrame.new(Vector3.new(-1, 0.75, 0)) * CFrame.Angles(math.rad(90), math.rad(-100), math.rad(-10)) }):Play()
-					wait(0.35)
-					game:GetService("TweenService"):Create(LA, TweenInfo.new(0.175, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), { C0 = CFrame.new(Vector3.new(-1, 0.75, 0)) * CFrame.Angles(math.rad(50), math.rad(-60), math.rad(-20)) }):Play()
-					wait(0.175)
-					Stuff.PlrHeld.Character:FindFirstChildOfClass("Humanoid").Health = 0
-					wait(0.25)
-					Stuff.PlrHeld = nil
-					if LA then
-						LA:Destroy()
-						LA = nil
-					end
-					if RA then
-						RA:Destroy()
-						RA = nil
-					end
-				elseif Stuff.Mode == 2 then -- throw
-					game:GetService("TweenService"):Create(LA, TweenInfo.new(0.15, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), { C0 = CFrame.new(Vector3.new(-1, 0.75, 0)) * CFrame.Angles(math.rad(0), math.rad(10), math.rad(-10)) }):Play()
-					game:GetService("TweenService"):Create(RA, TweenInfo.new(0.15, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), { C0 = CFrame.new(Vector3.new(1, 0.75, 1)) * CFrame.Angles(math.rad(70), math.rad(60), math.rad(10)) }):Play()
-					wait(0.075)
-					Stuff.PlrHeld.Character:FindFirstChildOfClass("Humanoid").PlatformStand = true
-					local BF = Instance.new("BodyForce")
-					BF.Parent = Stuff.PlrHeld.Character.PrimaryPart
-					BF.Force = Vector3.new(0, 20, 0) + LocalPlayer.Character.HumanoidRootPart.CFrame.LookVector * 20
-					wait(0.25)
-					BF:Destroy()
-					wait(0.25)
-					Stuff.PlrHeld.Character:FindFirstChildOfClass("Humanoid").PlatformStand = false
-					if Stuff.PlrHeld.Character.PrimaryPart:FindFirstChild("CFrameFix") then
-						Stuff.PlrHeld.Character.PrimaryPart:FindFirstChild("CFrameFix"):Destroy()
-					end
-					Stuff.PlrHeld = nil
-					if LA then
-						LA:Destroy()
-						LA = nil
-					end
-					if RA then
-						RA:Destroy()
-						RA = nil
-					end
-				elseif Stuff.Mode == 3 then -- let go
-					if Stuff.PlrHeld.Character.PrimaryPart:FindFirstChild("CFrameFix") then
-						Stuff.PlrHeld.Character.PrimaryPart:FindFirstChild("CFrameFix"):Destroy()
-					end
-					Stuff.PlrHeld.Character:FindFirstChildOfClass("Humanoid").PlatformStand = false
-					Stuff.PlrHeld = nil
-					if LA then
-						LA:Destroy()
-						LA = nil
-					end
-					if RA then
-						RA:Destroy()
-						RA = nil
-					end
-				end
-
-			elseif Stuff.Mode == 4 then -- suicide
-
-				if LA then
-					LA:Destroy()
-					LA = nil
-				end
-				if RA then
-					RA:Destroy()
-					RA = nil
-				end
-
-				LA = Instance.new("Weld")
-				LA.Name = "GrabKnifeLA"
-				LA.Parent = LocalPlayer.Character
-				LA.Part0 = LocalPlayer.Character.Torso
-				LA.Part1 = LeftArm
-				LA.C0 = CFrame.new(Vector3.new(-1, 0.75, 0)) * CFrame.Angles(math.rad(10), math.rad(10), math.rad(-10))
+                Player.Character.Humanoid.WalkSpeed = 0
+                Player.Character.Humanoid.JumpPower = 0
+         
+                grabdelay = false
+                killdelay = false
+                grabkill = LocalPlayer:GetMouse().Button1Down:Connect(function()
+                if not killdelay then
+                Player.Character:BreakJoints()
+                LA.C0 = CFrame.new(Vector3.new(-1, 1, 0)) * CFrame.Angles(math.rad(10), math.rad(10), math.rad(-10))
 				LA.C1 = CFrame.new(Vector3.new(0.5, 1, 0)) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
-				wait(0.5)
-
-				game:GetService("TweenService"):Create(LA, TweenInfo.new(1, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), { C0 = CFrame.new(Vector3.new(-1.5, 0.75, 0)) * CFrame.Angles(math.rad(80), math.rad(-100), math.rad(-10)) }):Play()
-				wait(1.5)
-
-				game:GetService("TweenService"):Create(LA, TweenInfo.new(0.075, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), { C0 = CFrame.new(Vector3.new(-1.5, 0.75, 1)) * CFrame.Angles(math.rad(30), math.rad(-130), math.rad(-10)) }):Play()
-				wait(0.1)
-				if LocalPlayer.Character:FindFirstChildOfClass("Humanoid") then
-					LocalPlayer.Character:FindFirstChildOfClass("Humanoid").Health = 0
-				end
-
-			end
-		end)
-
-
-		repeat
-			if Stuff.PlrHeld ~= nil and Stuff.PlrHeld.ClassName == "Player" and Stuff.PlrHeld.Character and Stuff.PlrHeld.Character.PrimaryPart and Stuff.PlrHeld.Character:FindFirstChildOfClass("Humanoid") and Stuff.PlrHeld.Character:FindFirstChildOfClass("Humanoid").Health > 0 then
-				if LA == nil then
-					LA = Instance.new("Weld")
-					LA.Name = "GrabKnifeLA"
-					LA.Parent = LocalPlayer.Character
-					LA.Part0 = LocalPlayer.Character.Torso
-					LA.Part1 = LeftArm
-					LA.C0 = CFrame.new(Vector3.new(-1, 0.75, 0)) * CFrame.Angles(math.rad(80), math.rad(-90), math.rad(-10))
-					LA.C1 = CFrame.new(Vector3.new(0.5, 1, 0)) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
-				end
-				if RA == nil then
-					RA = Instance.new("Weld")
-					RA.Name = "GrabKnifeRA"
-					RA.Parent = LocalPlayer.Character
-					RA.Part0 = LocalPlayer.Character.Torso
-					RA.Part1 = RightArm
-					RA.C0 = CFrame.new(Vector3.new(1, 0.75, 0)) * CFrame.Angles(math.rad(70), math.rad(40), math.rad(10))
-					RA.C1 = CFrame.new(Vector3.new(-0.5, 1, 0)) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
-				end
-				for i, v in pairs(Stuff.PlrHeld.Character:GetDescendants()) do
-					if v:IsA("BasePart") then
-						v.CanCollide = false 
-					end
-				end
-				Stuff.PlrHeld.Character:FindFirstChildOfClass("Humanoid").PlatformStand = true
-				if not Stuff.PlrHeld.Character.PrimaryPart:FindFirstChild("CFrameFix") then
-					local bv = Instance.new("BodyVelocity")
-					bv.Name = "CFrameFix"
-					bv.Parent = Stuff.PlrHeld.Character.PrimaryPart
-					bv.Velocity = Vector3.new(0, 0, 0)
-				end
-				Stuff.PlrHeld.Character:SetPrimaryPartCFrame(LocalPlayer.Character.PrimaryPart.CFrame + LocalPlayer.Character.PrimaryPart.CFrame.LookVector * LocalPlayer.Character.PrimaryPart.Size.Z)
-			end
-			game:GetService("RunService").Stepped:Wait()
-		until not (LocalPlayer and LocalPlayer.Character and Knife and Knife.Parent == LocalPlayer.Character and LocalPlayer.Character:FindFirstChildOfClass("Humanoid") and LocalPlayer.Character:FindFirstChildOfClass("Humanoid").Health > 0)
-
-		if LA ~= nil then
-			LA:Destroy()
-			LA = nil
-		end
-		if RA ~= nil then
-			RA:Destroy() 
-			RA = nil
-		end
-
-		for i, v in pairs(Stuff.Events) do
-			v:Disconnect() 
-		end
-
-		if LocalPlayer:FindFirstChild("-Running") then
-			LocalPlayer:FindFirstChild("-Running"):Destroy()
-		end
-
-		if LocalPlayer and LocalPlayer.Character and LocalPlayer.Character:FindFirstChildOfClass("Humanoid") then
-			LocalPlayer.Character:FindFirstChildOfClass("Humanoid").Health = 0
-		end
-
-	end
-end)
-
-Unknown.AddCommand("Karambit", "Loads FE karambit", function()
-	local KnifeAccessory
-
-	if LocalPlayer:FindFirstChild("-Running") then
-		return Unknown.Notify("Command: " .. LocalPlayer["-Running"].Value .. " is already running.", {7, 1, 1})
-	elseif not LocalPlayer.Character:FindFirstChildOfClass("Accessory") then
-		return Unknown.Notify("You need at least 1 hat or preferably accessory:\n https://www.roblox.com/catalog/4684948729/Kawaii-Knife", {7, 1, 1})
-	else
-
-		if LocalPlayer.Character:FindFirstChild("YandereKnife") and LocalPlayer.Character["YandereKnife"].ClassName == "Accessory" then
-			KnifeAccessory = LocalPlayer.Character["YandereKnife"]
-		else
-			KnifeAccessory = LocalPlayer.Character:FindFirstChildOfClass("Accessory")
-		end
-
-		local Running = Instance.new("StringValue")
-		Running.Parent = LocalPlayer
-		Running.Name = "-Running"
-		Running.Value = "Karambit"
-
-		local Torso = LocalPlayer.Character.Torso:Clone()
-		Torso.Parent = LocalPlayer.Character
-		Torso.Name = "AnimTorso"
-		Torso.Transparency = 1
-		Torso.CanCollide = false
-		Torso:ClearAllChildren()
-
-		local LeftArm = LocalPlayer.Character["Left Arm"]:Clone()
-		LeftArm.Parent = LocalPlayer.Character
-		LeftArm.Name = "LeftArm"
-		LeftArm.Transparency = 1
-		LeftArm.CanCollide = false
-		LeftArm:ClearAllChildren()
-
-		local RightArm = LocalPlayer.Character["Right Arm"]:Clone()
-		RightArm.Parent = LocalPlayer.Character
-		RightArm.Name = "RightArm"
-		RightArm.Transparency = 1
-		RightArm.CanCollide = false
-		RightArm:ClearAllChildren()
-
-		--LocalPlayer.Character.HumanoidRootPart.CanCollide = true
-
-		local Stuff = {
-			Events = {}, 
-			Debounces = {Button1DownDebounce = false}, 
-			LeftClickHolding = false, 
-			Mode = 1,  -- 1 = attack, 2 = climb mode
-			AttackCombo = 1, 
-			Stab = false, 
-			Climbing = false
-		}
-
-		if LocalPlayer.Character:FindFirstChild("-Karambit") then
-			LocalPlayer.Character:FindFirstChild("-Karambit"):Destroy()
-		end
-		if LocalPlayer.Character:FindFirstChild("KarambitLA") then
-			LocalPlayer.Character:FindFirstChild("KarambitLA"):Destroy()
-		end
-		if LocalPlayer.Character:FindFirstChild("KarambitRA") then
-			LocalPlayer.Character:FindFirstChild("KarambitRA"):Destroy()
-		end
-		if LocalPlayer.Character:FindFirstChild("KarambitT") then
-			LocalPlayer.Character:FindFirstChild("KarambitT"):Destroy()
-		end
-
-		local LA
-		local RA
-		local RJ
-
-		LocalPlayer.Character.HumanoidRootPart.Anchored = true
-
-
-		local Attach0 = Instance.new("Attachment")
-		Attach0.Parent = LocalPlayer.Character.Torso
-		local Attach1 = Instance.new("Attachment")
-		Attach1.Parent = Torso
-
-		local Pos = Instance.new("AlignPosition")
-		Pos.Parent = LocalPlayer.Character.Torso
-		Pos.RigidityEnabled = true
-		Pos.Attachment0, Pos.Attachment1 = Attach0, Attach1
-
-		local Rot = Instance.new("AlignOrientation")
-		Rot.Parent = LocalPlayer.Character.Torso
-		Rot.RigidityEnabled = true
-		Rot.Attachment0, Rot.Attachment1 = Attach0, Attach1
-
-		LocalPlayer.Character.HumanoidRootPart.RootJoint:Destroy()
-
-		local Attach0 = Instance.new("Attachment")
-		Attach0.Parent = LocalPlayer.Character["Right Arm"]
-		local Attach1 = Instance.new("Attachment")
-		Attach1.Parent = RightArm
-
-		local Pos = Instance.new("AlignPosition")
-		Pos.Parent = LocalPlayer.Character.Torso
-		Pos.RigidityEnabled = true
-		Pos.Attachment0, Pos.Attachment1 = Attach0, Attach1
-
-		local Rot = Instance.new("AlignOrientation")
-		Rot.Parent = LocalPlayer.Character.Torso
-		Rot.RigidityEnabled = true
-		Rot.Attachment0, Rot.Attachment1 = Attach0, Attach1
-
-		LocalPlayer.Character.Torso["Right Shoulder"]:Destroy()
-
-
-		local Attach0 = Instance.new("Attachment")
-		Attach0.Parent = LocalPlayer.Character["Left Arm"]
-		local Attach1 = Instance.new("Attachment")
-		Attach1.Parent = LeftArm
-
-		local Pos = Instance.new("AlignPosition")
-		Pos.Parent = LocalPlayer.Character.Torso
-		Pos.RigidityEnabled = true
-		Pos.Attachment0, Pos.Attachment1 = Attach0, Attach1
-
-		local Rot = Instance.new("AlignOrientation")
-		Rot.Parent = LocalPlayer.Character.Torso
-		Rot.RigidityEnabled = true
-		Rot.Attachment0, Rot.Attachment1 = Attach0, Attach1
-
-		LocalPlayer.Character.Torso["Left Shoulder"]:Destroy()
-
-
-		local Knife = Instance.new("Part")
-		Knife.Name = "-Karambit"
-		Knife.Parent = LocalPlayer.Character
-		Knife.Size = Vector3.new(0.25, 2, 0.25)
-		Knife.Transparency = 1
-		Knife.CanCollide = false
-
-		local KnifeWeld = Instance.new("Weld")
-		KnifeWeld.Parent = Knife
-		KnifeWeld.Part0 = RightArm
-		KnifeWeld.Part1 = Knife
-		KnifeWeld.C0 = CFrame.new(Vector3.new(-0.2, -1.125, 0.5)) * CFrame.Angles(math.rad(-90), math.rad(0), math.rad(0))
-		KnifeWeld.C1 = CFrame.new(Vector3.new(0, 0, -0.125)) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
-
-		local BV = Instance.new("BodyVelocity")
-		BV.Parent = KnifeAccessory.Handle
-		BV.Velocity = Vector3.new(0, 0, 0)
-
-		KnifeAccessory.Handle.AccessoryWeld:Destroy()
-
-		RA = Instance.new("Weld")
-		RA.Name = "KarambitRA"
-		RA.Parent = LocalPlayer.Character
-		RA.Part0 = Torso
-		RA.Part1 = RightArm
-		RA.C0 = CFrame.new(Vector3.new(1.5, 1, 0)) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
-		RA.C1 = CFrame.new(Vector3.new(0, 1, 0)) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
-
-		LA = Instance.new("Weld")
-		LA.Name = "KarambitLA"
-		LA.Parent = LocalPlayer.Character
-		LA.Part0 = Torso
-		LA.Part1 = LeftArm
-		LA.C0 = CFrame.new(Vector3.new(-1.5, 1, 0)) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
-		LA.C1 = CFrame.new(Vector3.new(0, 1, 0)) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
-
-		RJ = Instance.new("Weld")
-		RJ.Name = "KarambitT"
-		RJ.Parent = LocalPlayer.Character
-		RJ.Part0 = LocalPlayer.Character.HumanoidRootPart
-		RJ.Part1 = Torso
-		RJ.C0 = CFrame.new(Vector3.new(0, 0, 0)) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
-		RJ.C1 = CFrame.new(Vector3.new(0, 0, 0)) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
-
-		game:GetService("TweenService"):Create(RA, TweenInfo.new(0.75, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), { C0 = CFrame.new(Vector3.new(1.35, 0, -0.25)) * CFrame.Angles(math.rad(150), math.rad(35), math.rad(-10)) }):Play()
-		wait(0.75)
-
-		LocalPlayer.Character.HumanoidRootPart.Anchored = false
-		LocalPlayer.Character.HumanoidRootPart.CanCollide = true
-
-		Stuff.Events.ModeChangeEvent = game:GetService("UserInputService").InputBegan:Connect(function(Key)
-			if Key.KeyCode == Enum.KeyCode.Q then
-				Stuff.Mode = 1
-			elseif Key.KeyCode == Enum.KeyCode.E then
-				Stuff.Mode = 2
-			end
-		end)
-
-		Stuff.Events.Button1DownEvent = LocalPlayer:GetMouse().Button1Down:Connect(function()
-			Stuff.LeftClickHolding = true
-			if Stuff.Debounces.Button1DownDebounce == false then
-				Stuff.Debounces.Button1DownDebounce = true
-
-				if LA ~= nil then
-					LA:Destroy()
-					LA = nil
-				end
-				if RA ~= nil then
-					RA:Destroy()
-					RA = nil
-				end
-				if RJ ~= nil then
-					RJ:Destroy()
-					RJ = nil
-				end
-
-				RA = Instance.new("Weld")
-				RA.Name = "KarambitRA"
-				RA.Parent = LocalPlayer.Character
-				RA.Part0 = Torso
-				RA.Part1 = RightArm
-				RA.C0 = CFrame.new(Vector3.new(1.5, 1, 0)) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
-				RA.C1 = CFrame.new(Vector3.new(0, 1, 0)) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
-
-				LA = Instance.new("Weld")
-				LA.Name = "KarambitLA"
-				LA.Parent = LocalPlayer.Character
-				LA.Part0 = Torso
-				LA.Part1 = LeftArm
-				LA.C0 = CFrame.new(Vector3.new(-1.5, 1, 0)) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
-				LA.C1 = CFrame.new(Vector3.new(0, 1, 0)) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
-
-				RJ = Instance.new("Weld")
-				RJ.Name = "KarambitT"
-				RJ.Parent = LocalPlayer.Character
-				RJ.Part0 = LocalPlayer.Character.HumanoidRootPart
-				RJ.Part1 = Torso
-				RJ.C0 = CFrame.new(Vector3.new(0, 0, 0)) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
-				RJ.C1 = CFrame.new(Vector3.new(0, 0, 0)) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
-
-				if Stuff.Mode == 1 then
-					if Stuff.AttackCombo == 1 then
-						game:GetService("TweenService"):Create(RJ, TweenInfo.new(0.35, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), { C0 = CFrame.new(Vector3.new(0, 0, 0)) * CFrame.Angles(math.rad(0), math.rad(45), math.rad(0)) }):Play()
-						game:GetService("TweenService"):Create(RA, TweenInfo.new(0.45, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), { C0 = CFrame.new(Vector3.new(1.15, 1, 0)) * CFrame.Angles(math.rad(90), math.rad(80), math.rad(0)) }):Play()
-						game:GetService("TweenService"):Create(LA, TweenInfo.new(0.45, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), { C0 = CFrame.new(Vector3.new(-1.5, 1, 0)) * CFrame.Angles(math.rad(-50), math.rad(45), math.rad(0)) }):Play()
-						wait(0.45)
-
-						game:GetService("TweenService"):Create(RJ, TweenInfo.new(0.1, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), { C0 = CFrame.new(Vector3.new(0, 0, 0)) * CFrame.Angles(math.rad(0), math.rad(-30), math.rad(0)) }):Play()
-						game:GetService("TweenService"):Create(RA, TweenInfo.new(0.1, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), { C0 = CFrame.new(Vector3.new(1.15, 1, 0)) * CFrame.Angles(math.rad(-70), math.rad(-80), math.rad(0)) }):Play()
-						game:GetService("TweenService"):Create(LA, TweenInfo.new(0.1, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), { C0 = CFrame.new(Vector3.new(-1.5, 1, 0)) * CFrame.Angles(math.rad(70), math.rad(-45), math.rad(0)) }):Play()
-
-						wait(0.025)
-						Stuff.Stab = true
-						wait(0.1)
-						Stuff.Stab = false
-
-						LA.C0 = CFrame.new(Vector3.new(-1.5, 1, 0)) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
-
-						game:GetService("TweenService"):Create(RJ, TweenInfo.new(0.1, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), { C0 = CFrame.new(Vector3.new(0, 0, 0)) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0)) }):Play()
-						game:GetService("TweenService"):Create(RA, TweenInfo.new(0.3, Enum.EasingStyle.Sine, Enum.EasingDirection.In), { C0 = CFrame.new(Vector3.new(1.35, 0, -0.25)) * CFrame.Angles(math.rad(100), math.rad(35), math.rad(-10)) }):Play()
-						wait(0.3)
-						game:GetService("TweenService"):Create(RA, TweenInfo.new(0.3, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), { C0 = CFrame.new(Vector3.new(1.35, 0, -0.25)) * CFrame.Angles(math.rad(140), math.rad(35), math.rad(-10)) }):Play()
-						Stuff.Debounces.Button1DownDebounce = false
-					elseif Stuff.AttackCombo == 2 then
-						game:GetService("TweenService"):Create(RJ, TweenInfo.new(0.35, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), { C0 = CFrame.new(Vector3.new(0, 0, 0)) * CFrame.Angles(math.rad(0), math.rad(20), math.rad(0)) }):Play()
-						game:GetService("TweenService"):Create(RA, TweenInfo.new(0.45, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), { C0 = CFrame.new(Vector3.new(1.5, 1, -0.25)) * CFrame.Angles(math.rad(20), math.rad(-10), math.rad(0)) }):Play()
-						game:GetService("TweenService"):Create(LA, TweenInfo.new(0.45, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), { C0 = CFrame.new(Vector3.new(-1.5, 1, 0)) * CFrame.Angles(math.rad(-10), math.rad(10), math.rad(0)) }):Play()
-						wait(0.45)
-						game:GetService("TweenService"):Create(RJ, TweenInfo.new(0.1, Enum.EasingStyle.Sine, Enum.EasingDirection.In), { C0 = CFrame.new(Vector3.new(0, 0, 0)) * CFrame.Angles(math.rad(0), math.rad(30), math.rad(0)) }):Play()
-						game:GetService("TweenService"):Create(RA, TweenInfo.new(0.1, Enum.EasingStyle.Sine, Enum.EasingDirection.In), { C0 = CFrame.new(Vector3.new(1.5, 1.5, -0.25)) * CFrame.Angles(math.rad(130), math.rad(-10), math.rad(0)) }):Play()
-						game:GetService("TweenService"):Create(LA, TweenInfo.new(0.1, Enum.EasingStyle.Sine, Enum.EasingDirection.In), { C0 = CFrame.new(Vector3.new(-1.5, 0.8, 0)) * CFrame.Angles(math.rad(-10), math.rad(20), math.rad(0)) }):Play()
-						wait(0.05)
-						Stuff.Stab = true
-						wait(0.1)
-						Stuff.Stab = false
-
-						LA.C0 = CFrame.new(Vector3.new(-1.5, 1, 0)) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
-
-						game:GetService("TweenService"):Create(RJ, TweenInfo.new(0.1, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), { C0 = CFrame.new(Vector3.new(0, 0, 0)) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0)) }):Play()
-						game:GetService("TweenService"):Create(RA, TweenInfo.new(0.3, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), { C0 = CFrame.new(Vector3.new(1.35, 0, -0.25)) * CFrame.Angles(math.rad(140), math.rad(35), math.rad(-10)) }):Play()
-						Stuff.Debounces.Button1DownDebounce = false
-					elseif Stuff.AttackCombo == 3 then
-						game:GetService("TweenService"):Create(RJ, TweenInfo.new(0.35, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), { C0 = CFrame.new(Vector3.new(0, 0, 0)) * CFrame.Angles(math.rad(0), math.rad(20), math.rad(0)) }):Play()
-						game:GetService("TweenService"):Create(RA, TweenInfo.new(0.45, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), { C0 = CFrame.new(Vector3.new(1.5, 1.25, -0.25)) * CFrame.Angles(math.rad(130), math.rad(-10), math.rad(0)) }):Play()
-						game:GetService("TweenService"):Create(LA, TweenInfo.new(0.45, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), { C0 = CFrame.new(Vector3.new(-1.5, 1, 0)) * CFrame.Angles(math.rad(-10), math.rad(10), math.rad(0)) }):Play()
-						wait(0.45)
-						game:GetService("TweenService"):Create(RJ, TweenInfo.new(0.1, Enum.EasingStyle.Sine, Enum.EasingDirection.In), { C0 = CFrame.new(Vector3.new(0, 0, 0)) * CFrame.Angles(math.rad(0), math.rad(30), math.rad(0)) }):Play()
-						game:GetService("TweenService"):Create(RA, TweenInfo.new(0.1, Enum.EasingStyle.Sine, Enum.EasingDirection.In), { C0 = CFrame.new(Vector3.new(1.5, 0.75, -0.25)) * CFrame.Angles(math.rad(90), math.rad(-10), math.rad(0)) }):Play()
-						game:GetService("TweenService"):Create(LA, TweenInfo.new(0.1, Enum.EasingStyle.Sine, Enum.EasingDirection.In), { C0 = CFrame.new(Vector3.new(-1.5, 1.2, 0)) * CFrame.Angles(math.rad(-10), math.rad(20), math.rad(0)) }):Play()
-						wait(0.05)
-						Stuff.Stab = true
-						wait(0.1)
-						Stuff.Stab = false
-
-						LA.C0 = CFrame.new(Vector3.new(-1.5, 1, 0)) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
-
-						game:GetService("TweenService"):Create(RJ, TweenInfo.new(0.1, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), { C0 = CFrame.new(Vector3.new(0, 0, 0)) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0)) }):Play()
-						game:GetService("TweenService"):Create(RA, TweenInfo.new(0.3, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), { C0 = CFrame.new(Vector3.new(1.35, 0, -0.25)) * CFrame.Angles(math.rad(140), math.rad(35), math.rad(-10)) }):Play()
-
-						Stuff.Debounces.Button1DownDebounce = false
-					end
-
-					if Stuff.AttackCombo >= 3 then
-						Stuff.AttackCombo = 1
-					else
-						Stuff.AttackCombo = Stuff.AttackCombo + 1
-					end
-
-				elseif Stuff.Mode == 2 then
-					if Stuff.Climbing == true then
-
-						Stuff.Climbing = false 
-					end
-					game:GetService("TweenService"):Create(RJ, TweenInfo.new(0.15, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), { C0 = CFrame.new(Vector3.new(0, 0, 0)) * CFrame.Angles(math.rad(0), math.rad(-20), math.rad(0)) }):Play()
-					game:GetService("TweenService"):Create(RA, TweenInfo.new(0.15, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), { C0 = CFrame.new(Vector3.new(1.5, 1.25, 0.25)) * CFrame.Angles(math.rad(200), math.rad(-10), math.rad(0)) }):Play()
-					game:GetService("TweenService"):Create(LA, TweenInfo.new(0.15, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), { C0 = CFrame.new(Vector3.new(-1.5, 1, 0)) * CFrame.Angles(math.rad(70), math.rad(45), math.rad(0)) }):Play()
-					wait(0.15)
-
-
-
-					repeat
-						wait()
-					until Stuff.LeftClickHolding == false
-
-					Stuff.Debounces.Button1DownDebounce = false
-				end
-
-
-			end
-		end)
-
-		Stuff.Events.Button1UpEvent = LocalPlayer:GetMouse().Button1Up:Connect(function()
-			Stuff.LeftClickHolding = false
-
-			if RJ and LA and RA and Stuff.Mode == 2 then
-
-				local PossibleWall = game.Workspace:FindPartOnRay(Ray.new(LocalPlayer.Character.HumanoidRootPart.Position, LocalPlayer.Character.HumanoidRootPart.CFrame.LookVector * 2), LocalPlayer.Character)
-				if PossibleWall ~= nil and PossibleWall.Size.Y >= 5 then
-					game:GetService("TweenService"):Create(RJ, TweenInfo.new(0.1, Enum.EasingStyle.Sine, Enum.EasingDirection.In), { C0 = CFrame.new(Vector3.new(0, 0, 0)) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0)) }):Play()
-					game:GetService("TweenService"):Create(RA, TweenInfo.new(0.1, Enum.EasingStyle.Sine, Enum.EasingDirection.In), { C0 = CFrame.new(Vector3.new(1.5, 1.25, 0.25)) * CFrame.Angles(math.rad(180), math.rad(5), math.rad(10)) }):Play()
-					game:GetService("TweenService"):Create(LA, TweenInfo.new(0.1, Enum.EasingStyle.Sine, Enum.EasingDirection.In), { C0 = CFrame.new(Vector3.new(-1.5, 0.5, 0)) * CFrame.Angles(math.rad(-10), math.rad(10), math.rad(0)) }):Play()
-
-					LocalPlayer.Character.HumanoidRootPart.Anchored = true
-
-					repeat
-						wait()
-					until Stuff.LeftClickHolding == true or Stuff.Mode ~= 2 or not game.Workspace:FindPartOnRay(Ray.new(LocalPlayer.Character.HumanoidRootPart.Position, LocalPlayer.Character.HumanoidRootPart.CFrame.LookVector * 5), LocalPlayer.Character) or not (LocalPlayer and LocalPlayer.Character and Knife and Knife.Parent == LocalPlayer.Character and LocalPlayer.Character:FindFirstChildOfClass("Humanoid") and LocalPlayer.Character:FindFirstChildOfClass("Humanoid").Health > 0)
-
-					LocalPlayer.Character.HumanoidRootPart.Anchored = false
-					LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(LocalPlayer.Character.HumanoidRootPart.Velocity.X, LocalPlayer.Character.Humanoid.JumpPower * 1.5, LocalPlayer.Character.HumanoidRootPart.Velocity.Z)
-
-					game:GetService("TweenService"):Create(RJ, TweenInfo.new(0.25, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), { C0 = CFrame.new(Vector3.new(0, 0, 0)) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0)) }):Play()
-					game:GetService("TweenService"):Create(RA, TweenInfo.new(0.25, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), { C0 = CFrame.new(Vector3.new(1.35, 1.5, -0.25)) * CFrame.Angles(math.rad(30), math.rad(-10), math.rad(-10)) }):Play()
-					game:GetService("TweenService"):Create(LA, TweenInfo.new(0.25, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), { C0 = CFrame.new(Vector3.new(-1.5, 1.1, 0)) * CFrame.Angles(math.rad(0), math.rad(10), math.rad(45)) }):Play()
-					wait(0.25)
-
-					game:GetService("TweenService"):Create(RA, TweenInfo.new(0.25, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), { C0 = CFrame.new(Vector3.new(1.35, 0, -0.25)) * CFrame.Angles(math.rad(150), math.rad(35), math.rad(-10)) }):Play()
-				else
-					game:GetService("TweenService"):Create(RJ, TweenInfo.new(0.15, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), { C0 = CFrame.new(Vector3.new(0, 0, 0)) * CFrame.Angles(math.rad(0), math.rad(20), math.rad(0)) }):Play()
-					game:GetService("TweenService"):Create(RA, TweenInfo.new(0.3, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), { C0 = CFrame.new(Vector3.new(1.5, 1.25, 0.25)) * CFrame.Angles(math.rad(50), math.rad(10), math.rad(0)) }):Play()
-					game:GetService("TweenService"):Create(LA, TweenInfo.new(0.3, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), { C0 = CFrame.new(Vector3.new(-1.5, 1, 0)) * CFrame.Angles(math.rad(-10), math.rad(10), math.rad(0)) }):Play()
-					wait(0.3)
-					game:GetService("TweenService"):Create(RJ, TweenInfo.new(0.15, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), { C0 = CFrame.new(Vector3.new(0, 0, 0)) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0)) }):Play()
-					game:GetService("TweenService"):Create(RA, TweenInfo.new(0.3, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), { C0 = CFrame.new(Vector3.new(1.35, 0, -0.25)) * CFrame.Angles(math.rad(150), math.rad(35), math.rad(-10)) }):Play()
-
-					LA.C0 = CFrame.new(Vector3.new(-1.5, 1, 0)) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
-				end
-
-			end
-		end)
-
-		repeat
-
-			if Stuff.Stab == true then
-				for i, v in pairs(game.Players:GetPlayers()) do
-					if v and v.Character and v.Character:FindFirstChild("-Claimed") and v.Character:FindFirstChildOfClass("Humanoid") then
-						if v.Character:FindFirstChildOfClass("Humanoid").Health > 0 and v.Character:FindFirstChildOfClass("Humanoid").Health ~= 1 then
-							spawn(function()
-								v.Character:FindFirstChildOfClass("Humanoid").Health = 1
-								v.Character:FindFirstChildOfClass("Humanoid").PlatformStand = true
-								wait(0.5)
-								v.Character:FindFirstChildOfClass("Humanoid").Health = 0
-							end)
+                RA.C0 = CFrame.new(Vector3.new(1, 1, 0)) * CFrame.Angles(math.rad(10), math.rad(-10), math.rad(10))
+				RA.C1 = CFrame.new(Vector3.new(-0.5, 1, 0)) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
+                grabdelay = false
+                killdelay = false
+                grabloop:disconnect()
+                grabkill:disconnect()
+                Player.Character["-Grabbed"]:Destroy()
+                end
+                end)
+                Instance.new("ObjectValue",Player.Character).Name = "-Grabbed"
+                grabloop = game:GetService("RunService").Heartbeat:Connect(function()
+                if not grabdelay then
+                LoopTillEnd = game:GetService("RunService").Stepped:Connect(function()
+				if Player and Player.Character and Player.Character:FindFirstChild("-Grabbed") then
+					for i2, v2 in pairs(Player.Character:GetDescendants()) do
+						if v2:IsA("BasePart") then
+							v2.CanCollide = false
 						end
 					end
+				else
+					LoopTillEnd:Disconnect()
 				end
-			end
+			end)
+                Player.Character:SetPrimaryPartCFrame(LocalPlayer.Character.PrimaryPart.CFrame + LocalPlayer.Character.PrimaryPart.CFrame.LookVector * LocalPlayer.Character.PrimaryPart.Size.Z * LocalPlayer.Character.PrimaryPart.Size.Z)
+                end
+                end)
 
-			LocalPlayer.Character.Head.CanCollide = false
-			LocalPlayer.Character.Torso.CanCollide = false
+        end
+        end			
+    end
+end,"player(s)")
 
-			KnifeAccessory.Handle.CanCollide = false
-			Knife.CanCollide = false
-			KnifeAccessory.Handle.CFrame = Knife.CFrame * CFrame.new(Vector3.new(0, 0, 0)) * CFrame.Angles(math.rad(180), math.rad(0), math.rad(90))
-			game:GetService("RunService").Stepped:Wait()
-		until not (LocalPlayer and LocalPlayer.Character and Knife and Knife.Parent == LocalPlayer.Character and LocalPlayer.Character:FindFirstChildOfClass("Humanoid") and LocalPlayer.Character:FindFirstChildOfClass("Humanoid").Health > 0)
-
-		if LA ~= nil then
-			LA:Destroy()
-			LA = nil
-		end
-		if RA ~= nil then
-			RA:Destroy() 
-			RA = nil
-		end
-		for i, v in pairs(Stuff.Events) do
-			v:Disconnect() 
-		end
-		if Running then
-			Running:Destroy()
-		end
-		Stuff = nil
-	end
-end)
 Unknown.AddCommand("dmode", "Yes.", function(player)
 	local chara = game.Players.LocalPlayer.Character
 	if Unknown.GetShortenedPlrFromName(player) ~= nil then
