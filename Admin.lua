@@ -1485,6 +1485,81 @@
     end, "player(s)")
 
 
+ Unknown.AddCommand("fclaim/fastclaim", "Claims player with networkownership.", function(player)  
+        if Unknown.GetShortenedPlrFromName(player) ~= nil then
+            local Player
+            for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
+                Player = v 
+                Unknown.Notify("Hold On...")
+                 local CurrentCFrame = LocalPlayer.Character.HumanoidRootPart.CFrame
+                 
+                repeat wait() until LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and LocalPlayer.Character:FindFirstChild("Humanoid") and LocalPlayer.Character:FindFirstChild("Head")
+            wait()
+            for g = 1,2,1 do
+            LocalPlayer.Character.HumanoidRootPart.CFrame = CurrentCFrame
+            end
+            
+
+            if true then
+                if LocalPlayer.Character:FindFirstChildOfClass("Tool") or LocalPlayer.Backpack:FindFirstChildOfClass("Tool") then
+                   print("got past")
+                    
+                
+                        if true then
+                             local Tool = LocalPlayer.Character:FindFirstChildOfClass("Tool") or LocalPlayer.Backpack:FindFirstChildOfClass("Tool")
+
+                            a = LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+                            LocalPlayer.Character:FindFirstChildOfClass("Humanoid").Name = "1"
+                            local newHum = LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):Clone()
+                            newHum.Parent = LocalPlayer.Character
+                            newHum.Name = "Humanoid"
+                            wait()
+                                                    if a then 
+                                a:Destroy()
+                            end
+                            Tool.Parent = LocalPlayer.Character
+                            if Tool:FindFirstChild("Handle") then
+                                local CurrentCFrame = LocalPlayer.Character.HumanoidRootPart.CFrame
+                               local CurrentCFrame2 = LocalPlayer.Character.HumanoidRootPart.CFrame
+                               LocalPlayer.Character.PrimaryPart = LocalPlayer.Character.HumanoidRootPart
+                                repeat
+                                   Player.Character.HumanoidRootPart.CFrame = (CFrame.new(Vector3.new(0,1000000,0)))
+                                    LocalPlayer.Character.HumanoidRootPart.CFrame = (Player.Character.HumanoidRootPart.CFrame) 
+                                    game:GetService("RunService").Heartbeat:Wait()
+                                until Tool.Parent == Player.Character
+                                    
+                                    LocalPlayer.Character:WaitForChild'HumanoidRootPart'.CFrame = CurrentCFrame2
+                                workspace.FallenPartsDestroyHeight = 0/1/0
+                                                                                    for i = 1,5  do
+                                                                   LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(Vector3.new(0,math.huge,0)))
+                                end    
+                                wait(.1)
+                                    for i = 1,5  do
+                                    LocalPlayer.Character:WaitForChild'HumanoidRootPart'.CFrame = CurrentCFrame2
+                                    end
+                            Wait(.2)
+                                        
+                                
+                                if not Player.Character:FindFirstChild("-Claimed") then
+                                    local Claimed = Instance.new("ObjectValue")
+                                    Claimed.Name = "-Claimed"
+                                    Claimed.Parent = Player.Character
+                                end
+                                LocalPlayer.Character:BreakJoints()
+                                LocalPlayer.Character:WaitForChild'HumanoidRootPart':Destroy()
+                                repeat wait() until LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+                            LocalPlayer.Character:WaitForChild'HumanoidRootPart'.CFrame = CurrentCFrame
+                                repeat
+                                    wait()
+                                until LocalPlayer.Character.HumanoidRootPart and LocalPlayer.Character:FindFirstChild("Head") and LocalPlayer.Character:FindFirstChild("Torso") and LocalPlayer.Character.Torso:FindFirstChild("Neck")
+                 
+    end
+    end
+    end
+    end
+    end
+    end
+    end, "player(s)")
 
 
 
