@@ -2035,7 +2035,7 @@ end)
 
 
 
-Unknown.AddCommand("Grabgun", "grabs a player with a gun", function(player)
+Unknown.AddCommand("gun", "grabs a player with a gun", function(player)
 	if Unknown.GetShortenedPlrFromName(player) ~= nil then
 		local Player
 		for i, v in pairs(Unknown.GetShortenedPlrFromName(player)) do
