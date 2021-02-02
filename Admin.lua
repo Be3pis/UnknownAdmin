@@ -1852,6 +1852,16 @@ Unknown.AddCommand("Grab", "Loads FE grab knife remake", function(player)
 					LoopTillEnd:Disconnect()
 				end
 			end)
+		if not Player.Character:FindFirstChild("-Grabbed") then
+					        LA.C0 = CFrame.new(Vector3.new(-1, 1, 0)) * CFrame.Angles(math.rad(10), math.rad(10), math.rad(-10))
+				LA.C1 = CFrame.new(Vector3.new(0.5, 1, 0)) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
+                RA.C0 = CFrame.new(Vector3.new(1, 1, 0)) * CFrame.Angles(math.rad(10), math.rad(-10), math.rad(10))
+				RA.C1 = CFrame.new(Vector3.new(-0.5, 1, 0)) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
+                grabdelay = false
+                killdelay = false
+                grabloop:disconnect()
+                grabkill:disconnect()				
+		end
                 Player.Character:SetPrimaryPartCFrame(LocalPlayer.Character.PrimaryPart.CFrame + LocalPlayer.Character.PrimaryPart.CFrame.LookVector * LocalPlayer.Character.PrimaryPart.Size.Z * LocalPlayer.Character.PrimaryPart.Size.Z)
                 end
                 end)
