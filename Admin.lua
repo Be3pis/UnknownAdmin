@@ -1410,7 +1410,7 @@ Unknown.AddCommand("claim", "Claims player with networkownership.", function(pla
                            local CurrentCFrame2 = Player.Character.HumanoidRootPart.CFrame
                            
                             repeat
-                               LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(Vector3.new(0,100000,0)))
+                               LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(Vector3.new(0,math.huge,0)))
                                 Player.Character:SetPrimaryPartCFrame(Tool.Handle.CFrame) 
                                 game:GetService("RunService").Heartbeat:Wait()
                             until Tool.Parent == Player.Character
@@ -1419,15 +1419,10 @@ Unknown.AddCommand("claim", "Claims player with networkownership.", function(pla
                             workspace.FallenPartsDestroyHeight = 0/1/0
                            
 
-                   
-                                for i = 1,10,1 do 
-                                LocalPlayer.Character:WaitForChild'HumanoidRootPart'.CFrame = CurrentCFrame2 - Vector3.new(0,math.huge,0)
-                                end
-                            wait(.1)
-                                 for i = 1,10,1 do 
+                                for i = 1,5  do
                                 LocalPlayer.Character:WaitForChild'HumanoidRootPart'.CFrame = CurrentCFrame2
-                                 end
-                            Wait(.2)
+                                end
+                        Wait(.2)
 									
                             
                             if not Player.Character:FindFirstChild("-Claimed") then
