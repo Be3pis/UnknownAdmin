@@ -1411,7 +1411,7 @@ Unknown.AddCommand("claim", "Claims player with networkownership.", function(pla
                         Tool.Parent = LocalPlayer.Character
                         if Tool:FindFirstChild("Handle") then
                             local CurrentCFrame = LocalPlayer.Character.HumanoidRootPart.CFrame
-                           local CurrentCFrame2 = Player.Character.HumanoidRootPart.CFrame
+                           local CurrentCFrame2 = LocalPlayer.Character.HumanoidRootPart.CFrame
                            LocalPlayer.Character.PrimaryPart = LocalPlayer.Character.HumanoidRootPart
                             repeat
                                Player.Character.HumanoidRootPart.CFrame = (CFrame.new(Vector3.new(0,1000000,0)))
