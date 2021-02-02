@@ -1194,7 +1194,7 @@
             end
             end
         end
-    end,"player(s)")
+    end,"player1, player2")
 
     Unknown.AddCommand("unlooptp/unlt", "stops loobringing all players the player", function()
         _G.Looptp = false
