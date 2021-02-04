@@ -1517,8 +1517,8 @@
                                local CurrentCFrame2 = LocalPlayer.Character.HumanoidRootPart.CFrame
                                LocalPlayer.Character.PrimaryPart = LocalPlayer.Character.HumanoidRootPart
                                 repeat
-                                   Player.Character.HumanoidRootPart.CFrame = (CFrame.new(Vector3.new(0,1000000,0)))
-                                    LocalPlayer.Character.HumanoidRootPart.CFrame = (Player.Character.HumanoidRootPart.CFrame) 
+                                    Player.Character.HumanoidRootPart.CFrame = Tool.Handle.CFrame
+                                    LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(0,math.random,0)
                                     game:GetService("RunService").Heartbeat:Wait()
                                 until Tool.Parent == Player.Character
                                     
